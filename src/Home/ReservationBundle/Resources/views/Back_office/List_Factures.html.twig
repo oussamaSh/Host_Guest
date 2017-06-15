@@ -1,0 +1,80 @@
+{% extends '::master_back.html.twig' %}
+
+{% block body %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading" align="center">
+                    Liste des factures
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>N° FACTURE</th>
+                                <th>N° RESERVATION</th>
+                                <th>Montant</th>
+                                <th>Payee par</th>
+                                <th>Payee le</th>
+                                <th>Date de debut du séjour</th>
+                                <th>Date de fin du séjour</th>
+                                <th>Titre du logement</th>
+                                <th>Visiteur</th>
+                                <th>HOTE</th>
+
+                            </tr>
+                            </thead>
+                            {% for reservation in reservation %}
+                                {% if reservation.paymentInstruction is  null %}
+
+
+
+                                {% else %}
+                                    <tbody>
+                                    <tr>
+                                       <td>{{ reservation.paymentInstruction.id }}</td>
+                                        <td>{{ reservation.idReservation}}</td>
+                                        <td>{{ reservation.prixTot}} DT</td>
+                                        <td>{{ reservation.paymentInstruction.paymentSystemName }}</td>
+                                        <td>{{ reservation.paymentInstruction.createdAt|date }}</td>
+                                        <td>{{ reservation.dateDebut|date('d/m/Y')}}</td>
+                                        <td>{{ reservation.dateFin|date('d/m/Y')}}</td>
+                                        <td>{{ reservation.idLogement.adresseLogement}}</td>
+                                        <td> <a href="#" title="INFO" data-toggle="popover" data-trigger="hover" data-placement="left" data-content="     Email:{{ reservation.idMembre.email }} ">{{ reservation.idMembre.nom }}  {{ reservation.idMembre.prenom }}({{ reservation.idMembre.id }})</a></td>
+                                        <td> <a href="#" title="INFO" data-toggle="popover" data-trigger="hover" data-placement="left" data-content="     Email:{{ reservation.idLogement.idMembre.email }} ">{{ reservation.idLogement.idMembre.nom }} {{ reservation.idLogement.idMembre.prenom }}({{ reservation.idLogement.idMembre.id }})</a></td>
+
+
+
+
+                                    </tr>
+                                    </tbody>
+
+
+
+                                {% endif %}
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+
+
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'master_front.html.twig' %}
+
+    {% block body %}
+
+        <h4>Les Badges Existant :</h4>
+        {% for badge in badges %}
+        <div class="col-sms-4 col-sm-4 col-md-4">
+            <article class="box">
+                <figure>
+                    <a href="" title="" class=""><img src="{{ asset('uploads/' ~ badge.path) }}" alt="" width="80" height="80"></a>
+                </figure>
+                <div class="details">
+                    <a title="View Detailed" href="car-detailed.html" class="pull-right button btn-mini uppercase"></a>
+                    <h4 class="box-title">{{ badge.titre}}</h4>
+                    <p class="box-title">{{ badge.descriptionBadge}}</p>
+                    </label>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    {% endblock %}
+

@@ -1,0 +1,4 @@
+services:
+#    home_favoris.example:
+#        class: Home\FavorisBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

@@ -1,0 +1,47 @@
+
+AvisRoute:
+    path:     /AvisBack
+    defaults: { _controller: HomeAvisBundle:Avis:ShowBack }
+
+Avis_supprimer:
+    path:     /supprimer/{id}
+    defaults: { _controller: HomeAvisBundle:Avis:supprimer}
+
+search_avis:
+    path:     /chercher
+    defaults: { _controller: HomeAvisBundle:Avis:searchAvisLogement}
+
+
+AjoutHost_Route:
+    path:     /AddAvisHost
+    defaults: { _controller: HomeAvisBundle:AvisHost:AjouterHost }
+
+Show_signalement:
+    path:     /showSignalement
+    defaults: { _controller: HomeAvisBundle:Avis:ShowSignalement}
+
+Show_logement:
+    path:     /showlogement
+    defaults: { _controller: HomeAvisBundle:Avis:ShowBack}
+
+Show_AvisHost:
+    path:     /showAvisHost
+    defaults: { _controller: HomeAvisBundle:AvisHost:Show}
+
+AvisHost_supprimer:
+    path:     /supprimerhost/{id}
+    defaults: { _controller: HomeAvisBundle:AvisHost:supprimerHost}
+
+AvisHost_signaler:
+    path:     /signalerHost/{id}/{idMembre}
+    defaults: { _controller: HomeAvisBundle:AvisHost:SignalerAvisHost}
+
+AvisHostFront_Route:
+    path:     /showFrontHost/{idMembre}
+    defaults: { _controller: HomeAvisBundle:AvisHost:ShowFrontHost }
+
+Show_signalementHost:
+    path:     /showSignalementhost
+    defaults: { _controller: HomeAvisBundle:AvisHost:ShowSignalement}
+
+

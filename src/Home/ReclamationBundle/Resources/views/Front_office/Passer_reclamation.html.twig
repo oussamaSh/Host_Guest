@@ -1,0 +1,43 @@
+{%  extends '::master_front.html.twig' %}
+
+{% block body %}
+    <section id="content" class="gray-area">
+        <div class="container text-left shortcode">
+            <div class="block">
+                <div class="row">
+                    <div class="col-lg-4 pull-left" >
+                    <img src="{{ asset('images/aa.jpg') }}"  height="420" width="320">
+                    </div>
+                    <div class="col-lg-4 listing-style3 flight">
+                        <div class="travelo-box book-with-us-box"><h1>Passer votre réclamation</h1>
+                        <form id="form_reclamation" method="POST" action="">
+                         <label><h4>Type</h4>
+                             <div class="selector">
+                            <select class="full-width" name="type_reclamation">
+                                <option value="Host" selected >Host</option>
+                                <option value="Guest">Guest</option>
+                                <option value="Livraison" >Livraison</option>
+                                <option value="Annonce">Annonce</option>
+                            </select>
+                             </div>
+                         </label><br>
+
+                         <label><h4>Contenu</h4>
+                             <textarea type="text" id="contenu_membre" name="contenu_membre" class="input-text full-width" placeholder="Votre message"></textarea>
+                         </label><br>
+
+                            <button type="submit" class="button btn-medium yellow">Valider</button>
+                        </form>
+                    </div>
+                    </div>
+
+                    <div class="col-lg-4 pull-right">
+                        <h1>Une réclamation?</h1>
+                        <p> Si vous avez une réclamation à nous faire parvenir concernant une annonce,une livraison ... ,n’hésitez surtout pas à nous en faire part.
+                            Le Service Relations Clientèle mettra tout en œuvre pour vous apporter une réponse rapide et efficace.
+                            Nous vous remercions de nous faire part de vos suggestions, vos appréciations, et vos réclamations.
+                        </p>
+                    </div>
+    </section>
+
+{%  endblock %}

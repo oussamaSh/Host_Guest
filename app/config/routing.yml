@@ -1,0 +1,58 @@
+home_entity:
+    resource: "@HomeEntityBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+home_user:
+    resource: "@HomeUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+home_favoris:
+    resource: "@HomeFavorisBundle/Resources/config/routing.yml"
+    prefix:   /favoris
+
+home_livraison:
+    resource: "@HomeLivraisonBundle/Resources/config/routing.yml"
+    prefix:   /
+
+home_boutique:
+    resource: "@HomeBoutiqueBundle/Resources/config/routing.yml"
+    prefix:   /
+
+home_annonce:
+    resource: "@HomeAnnonceBundle/Resources/config/routing.yml"
+    prefix:   /home
+
+home_newsletters:
+    resource: "@HomeNewslettersBundle/Resources/config/routing.yml"
+    prefix:   /
+
+home_badge:
+    resource: "@HomeBadgeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+home_avis:
+    resource: "@HomeAvisBundle/Resources/config/routing.yml"
+    prefix:   /
+
+home_notification:
+    resource: "@HomeNotificationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+home_reservation:
+    resource: "@HomeReservationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+home_reclamation:
+    resource: "@HomeReclamationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

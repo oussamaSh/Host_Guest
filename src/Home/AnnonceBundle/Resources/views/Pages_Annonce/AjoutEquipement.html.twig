@@ -1,0 +1,22 @@
+{% extends '::master_front.html.twig' %}
+
+{% block body %}
+
+
+            <form id="form_equipement" method="POST" action="">
+
+                <label><input type="checkbox" id="chb_Ascenseur" name="chb_Ascenseur">Ascenseur</label>
+                <label><input type="checkbox" id="chb_Gardien" name="chb_Gardien">Gardien</label>
+                <label><input type="checkbox" id="chb_Internet" name="chb_Internet">Internet</label>
+                <label><input type="checkbox" id="chb_Television" name="chb_Television">Television</label>
+                <label><input type="checkbox" id="chb_secheLinge" name="chb_secheLinge">Séche Linge</label>
+                <label><input type="checkbox" id="chb_Interphone" name="chb_Interphone">Interphone</label>
+                <label><input type="checkbox" id="chb_SecheCheveux" name="chb_SecheCheveux">Séche cheveux</label>
+                <label><input type="checkbox" id="chb_MachineALaver" name="chb_MachineALaver">Machine à laver</label>
+                <label><input type="checkbox" id="chb_Chauffage" name="chb_Chauffage">Chauffage</label>
+                <label><input type="checkbox" id="chb_Climatisation" name="chb_Climatisation">Climatisation</label>
+                <label><input type="checkbox" id="chb_AnimauxAutorise" name="chb_AnimauxAutorise">Animaux autorisés</label>
+                <input type="submit" value="Valider">
+            </form>
+
+{% endblock %}

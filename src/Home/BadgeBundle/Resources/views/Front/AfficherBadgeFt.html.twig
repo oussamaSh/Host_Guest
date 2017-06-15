@@ -1,0 +1,23 @@
+{% extends 'master_front.html.twig' %}
+
+    {% block body %}
+
+{% for badge in badges %}
+<div class="car-list row image-box listing-style2">
+    <div class="col-sms-6 col-sm-6 col-md-4">
+        <article class="box">
+            <figure>
+                <a href="car-detailed.html" title="" class="hover-effect"><img src="http://placehold.it/270x160" alt="" width="270" height="160" /></a>
+            </figure>
+            <div class="details">
+                <img alt="" src="{{ asset('uploads/' ~ badge.path) }}" height="150" width="115" />
+                <a title="View Detailed" href="car-detailed.html" class="pull-right button btn-mini uppercase">select</a>
+                <h4 class="box-title">{{ badge.titre}}</h4>
+                <p class="box-title">{{ badge.descriptionBadge}}</p>
+                </label>
+            </div>
+        </article>
+    </div>
+    </div>
+{% endfor %}
+    {% endblock %}

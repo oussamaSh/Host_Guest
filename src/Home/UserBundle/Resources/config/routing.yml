@@ -1,0 +1,19 @@
+home_user_user:
+    resource: "@HomeUserBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
+home_user_homepage:
+    path:     /
+    defaults: { _controller: HomeUserBundle:Default:index }
+
+login:
+    path:     /login
+    defaults: { _controller: HomeUserBundle:Security:login }
+
+inscription:
+    path:     /register
+    defaults: { _controller: "HomeUserBundle:Registration:register" }
+
+confirme:
+    path:     /confirme
+    defaults: { _controller: "HomeUserBundle:Registration:confirmed" }

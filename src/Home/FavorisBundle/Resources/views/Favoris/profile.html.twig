@@ -1,0 +1,442 @@
+{% extends '::master_front.html.twig' %}
+{% block body %}
+    <script type="text/javascript" src="{{ asset('dist/js/jquery.js') }}"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="{{ asset('dist/js/FavorisJS/Style.css') }}">
+    <script type="text/javascript" src="{{ asset('dist/js/FavorisJS/profile.js') }}"></script>
+    <script src="{{ asset('bundles/bnbcupload/js/5_init.js') }}"></script>
+    <script src="{{ asset('bundles/bnbcupload/js/3_jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('bundles/bnbcupload/js/4_jquery.fileupload.js') }}"></script>
+
+    <section id="content" class="gray-area">
+        <div class="container">
+            <div id="main">
+                <div class="tab-container full-width-style arrow-left dashboard">
+                    <ul class="tabs">
+
+                        <li class="active"><a data-toggle="tab" href="#profile" aria-expanded="false"><i class="soap-icon-user circle"></i>Profile</a></li>
+                        <li class=""><a data-toggle="tab" href="#travel-stories"><i class="soap-icon-conference circle"></i>Posts</a></li>
+                        <li class=""><a data-toggle="tab" href="#follow"><i class="soap-icon-wishlist circle"></i>Followers/Following</a></li>
+                        <li class=""><a data-toggle="tab" href="#gallery"><i class="soap-icon-photogallery circle"></i>Gallerie</a></li>
+
+
+                    </ul>
+
+                    <div class="tab-content">
+
+                        <div id="profile" class="tab-pane fade active in">
+                            <div class="view-profile">
+                                <article class="image-box style2 box innerstyle personal-details">
+                                    <figure>
+                                        <a title="" href="#"><img width="270" height="263" alt="" src="{{ asset('Uploads/Images/') }}{{ user.getAvatar() }}"></a>
+                                    </figure>
+
+                                    <div class="details">
+
+                                        <h2 class="box-title fullname">{{ user.nom }} {{ user.prenom }}</h2>
+                                        <div class="follow">
+                                        {% if follow != null %}
+                                            <a id="{{ user.id }}" class="button btn-small light-orange following">FOLLOWING</a>
+                                        {% elseif follow == null   %}
+                                            <a id="{{ user.id }}" class="button btn-small light-orange follow">FOLLOW</a>
+                                        {% endif %}
+                                        </div>
+                                        <dl class="term-description" style="height: 70px;">
+                                            <dt>Nom:</dt><dd>{{ user.nom }}</dd>
+                                            <dt>Prenom:</dt><dd>{{ user.prenom }}</dd>
+                                            <dt>Date de naissance:</dt><dd>{{ user.dateNaissance }}</dd>
+                                        </dl>
+                                        <div id="dashboard" class="tab-pane fade active in">
+                                            <div class="row block">
+                                                <div class="col-sm-6 col-md-3">
+                                                    <a href="hotel-list-view.html">
+                                                        <div class="fact blue">
+                                                            <div class="numbers counters-box">
+                                                                <dl>
+                                                                    <dt class="display-counter" data-value="{{ user.followers.count }}">{{ user.followers.count }}</dt>
+                                                                    <dd>Followers
+                                                                    </dd>
+                                                                </dl>
+                                                                <i class="icon soap-icon-hotel"></i>
+                                                            </div>
+                                                            <div class="description">
+                                                                <i class="icon soap-icon-longarrow-right"></i>
+                                                                <span>View</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="col-sm-6 col-md-3">
+                                                    <a href="flight-list-view.html">
+                                                        <div class="fact yellow">
+                                                            <div class="numbers counters-box">
+                                                                <dl>
+                                                                    <dt class="display-counter" data-value="{{ user.followings.count }}">{{ user.followings.count }}</dt>
+                                                                    <dd>Following</dd>
+                                                                </dl>
+                                                                <i class="icon soap-icon-plane"></i>
+                                                            </div>
+                                                            <div class="description">
+                                                                <i class="icon soap-icon-longarrow-right"></i>
+                                                                <span>View</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="col-sm-6 col-md-3">
+                                                    <a href="car-list-view.html">
+                                                        <div class="fact red">
+                                                            <div class="numbers counters-box">
+                                                                <dl>
+                                                                    <dt class="display-counter" data-value="{{ user.posts.count }}">{{ user.posts.count }}</dt>
+                                                                    <dd><font style="color:red;">aaa</font> Posts
+                                                                    </dd>
+                                                                </dl>
+                                                                <i class="icon soap-icon-car"></i>
+                                                            </div>
+                                                            <div class="description">
+                                                                <i class="icon soap-icon-longarrow-right"></i>
+                                                                <span>View</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="col-sm-6 col-md-3">
+                                                    <a href="cruise-list-view.html">
+                                                        <div class="fact green">
+                                                            <div class="numbers counters-box">
+                                                                <dl>
+                                                                    <dt class="display-counter" data-value="{{ user.likes.count }}">{{ user.likes.count }}</dt>
+                                                                    <dd><font style="color:#98ce44;">aaaa</font>Likes</dd>
+                                                                </dl>
+                                                                <i class="icon soap-icon-cruise flip-effect"></i>
+                                                            </div>
+                                                            <div class="description">
+                                                                <i class="icon soap-icon-longarrow-right"></i>
+                                                                <span>View</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+                                            <hr>
+
+                                        </div>
+                                    </div>
+
+                                </article>
+                                <hr>
+                                <h2>About</h2>
+                                <div class="intro">
+                                    <p>Vestibulum na non vehicula gravida, ante arcu pulvinar arcu, aliquet luctus arcu purus sit amet sem. Mauris blandit odio sed nisi porttitor egestas. Mauris in quam interdum purus vehicula rutrum quis in sem. Integer interdum lectus at nulla dictum luctus. Sed risus felis, posuere id condimentum non, egestas pulvinar enim. Praesent pretium risus eget nisi ullamcorper fermentum. Duis lacinia nisi ac rhoncus vestibulum.</p>
+                                </div>
+                                <hr>
+
+                            </div>
+                            <div class="edit-profile" style="display: none;">
+                                <form class="edit-profile-form">
+                                    <h2>Personal Details</h2>
+                                    <div class="col-sm-9 no-padding no-float">
+                                        <div class="row form-group">
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>First Name</label>
+                                                <input type="text" class="input-text full-width" placeholder="">
+                                            </div>
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Last Name</label>
+                                                <input type="text" class="input-text full-width" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Email Address</label>
+                                                <input type="text" class="input-text full-width" placeholder="">
+                                            </div>
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Verify Email Address</label>
+                                                <input type="text" class="input-text full-width" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Country Code</label>
+                                                <div class="selector">
+                                                    <select class="full-width">
+                                                        <option>United Kingdom (+44)</option>
+                                                        <option>United States (+1)</option>
+                                                    </select><span class="custom-select full-width">United Kingdom (+44)</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Phone Number</label>
+                                                <input type="text" class="input-text full-width" placeholder="">
+                                            </div>
+                                        </div>
+
+                                        <label>Date of Birth</label>
+                                        <div class="row form-group">
+                                            <div class="col-sms-4 col-sm-2">
+                                                <div class="selector">
+                                                    <select class="full-width">
+                                                        <option value="">date</option>
+                                                    </select><span class="custom-select full-width">date</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sms-4 col-sm-2">
+                                                <div class="selector">
+                                                    <select class="full-width">
+                                                        <option value="">month</option>
+                                                    </select><span class="custom-select full-width">month</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sms-4 col-sm-2">
+                                                <div class="selector">
+                                                    <select class="full-width">
+                                                        <option value="">year</option>
+                                                    </select><span class="custom-select full-width">year</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <h2>Contact Details</h2>
+                                        <div class="row form-group">
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Street Name</label>
+                                                <input type="text" class="input-text full-width">
+                                            </div>
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Address</label>
+                                                <input type="text" class="input-text full-width">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>City</label>
+                                                <div class="selector">
+                                                    <select class="full-width">
+                                                        <option value="">Select...</option>
+                                                    </select><span class="custom-select full-width">Select...</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Country</label>
+                                                <div class="selector">
+                                                    <select class="full-width">
+                                                        <option value="">Select...</option>
+                                                    </select><span class="custom-select full-width">Select...</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sms-6 col-sm-6">
+                                                <label>Region State</label>
+                                                <div class="selector">
+                                                    <select class="full-width">
+                                                        <option value="">Select...</option>
+                                                    </select><span class="custom-select full-width">Select...</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <h2>Upload Profile Photo</h2>
+                                        <div class="row form-group">
+                                            <div class="col-sms-12 col-sm-6 no-float">
+                                                <div class="fileinput full-width" style="line-height: 34px;">
+                                                    <input type="file" class="input-text" data-placeholder="select image/s"><input type="text" class="custom-fileinput input-text" placeholder="select image/s">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <h2>Describe Yourself</h2>
+                                        <div class="form-group">
+                                            <textarea rows="5" class="input-text full-width" placeholder="please tell us about you"></textarea>
+                                        </div>
+                                        <div class="from-group">
+                                            <button type="submit" class="btn-medium col-sms-6 col-sm-4">UPDATE SETTINGS</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <div id="travel-stories" class="tab-pane fade">
+                            <div class="blog-infinite" style="  margin: 0 auto; width: 70%;">
+                                {% if user.posts is empty %}
+                                <h2>You currently have no posts</h2>
+                                {% endif %}
+                            {% for post in user.posts %}
+                                {% if post.getClassType() == "Status" %}
+                            <div class="post without-featured-item" id="id{{ post.id }}">
+                                <div class="post-content-wrapper">
+                                    <div class="details">
+                                        <h2 class="entry-title">
+                                            <div class="entry-author fn">
+                                                <div class="avatar">
+                                                    <img src="{{ asset('Uploads/Images/') }}{{ post.getUser().getAvatar() }}" width="20" height="20" alt=""><a href="#" class="author" style="font-weight: 700;">{{ post.user.nom }}  {{ post.user.prenom }}</a>
+                                                </div>
+
+                                            </div></h2>
+                                        <div class="excerpt-container">
+                                            <p>{{ post.contenu }}</p>
+                                        </div>
+                                        <div class="post-meta">
+                                            <div class="entry-date">
+                                                <label class="date">{{ post.dateAjout.format('d') }}</label>
+                                                <label class="month">{{ post.dateAjout.format('M') }}</label>
+                                            </div>
+
+                                            <div class="entry-action" >
+                                                <a  class="button entry-comment btn-small comm_visibility" id="{{ post.id }}"><i class="soap-icon-comment" id="{{ post.id }}"></i>
+                                                    {{ post.comments.count }} Commentaire(s)</a>
+                                                <a  class="button btn-small like_btn
+                                                    {% for like in post.likes %}
+                                                    {% if like.user == app.user %}
+                                                    liked " style="background: #01b7f2;color:#fff;
+                                                {% endif %}
+                                                    {% endfor %}"
+                                                    id="{{ post.id }}"
+                                                >
+                                                    <input class="nb_likes " value="{{ post.likes.count }}" hidden> <i class="soap-icon-wishlist {% for like in post.likes %}
+                                                    {% if like.user == app.user %}
+                                                    white-color
+                                                        {% endif %}
+                                                    {% endfor %}" id="{{ post.id }}"></i>
+                                                    <span id="{{ post.id }}">{{ post.likes.count }} Like(s)</span></a>
+                                                <span class="entry-tags"><i class="soap-icon-features"></i><span><a href="#">Adventure</a>, <a href="#">Romance</a></span></span>
+                                            </div>
+
+                                        </div>
+                                        <div class="comments-container block" style="display: none;">
+
+                                            <ul class="comment-list travelo-box">
+                                                {% for comment in post.comments %}
+                                                    <li class="comment depth-1" >
+                                                        <div class="the-comment" style="height: 10%;">
+                                                            <div class="avatar">
+                                                                <img src="{{ asset('Uploads/Images/') }}{{ comment.getUser().getAvatar() }}" width="20" height="20" alt="">
+                                                            </div>
+                                                            <div class="comment-box">
+                                                                <div class="comment-author">
+                                                                    <a href="#" class="button btn-mini pull-right">REPLY</a>
+                                                                    <h4 class="box-title"><a href="#">{{ comment.getUser().getNom() }}</a><small>{{ comment.getDateAjoutString() }}</small></h4>
+                                                                </div>
+                                                                <div class="comment-text">
+                                                                    <p> {{ comment.contenu}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <input class="input-text full-width add_comment" type="text" class="add_comment" id="{{ post.id }}" placeholder="Votre commentaire ici...">
+                                    </div>
+                                </div>
+                            </div>
+                                    {% endif %}
+                            {% endfor %}
+                            </div>
+                        </div>
+
+
+                        <div id="follow" class="tab-pane fade">
+                            <h2>Followed By</h2>
+                            {% if user.followers is empty %}
+                                <h3>You currently have no followers</h3>
+                            {% endif %}
+                            <div class="row image-box listing-style2">
+                                {% for  follower in user.followers %}
+                                <div class="col-sm-6 col-md-4">
+                                    <article class="box">
+                                        <figure style="width: 70px;margin: auto;">
+                                            <div class="avatar">
+                                                <img src="{{ asset('Uploads/Images/') }}{{ follower.idMembre.getAvatar() }}" width="20" height="20" alt="">
+                                            </div>
+                                        </figure>
+                                        <div class="details">
+
+                                            <a class="pull-right button uppercase" href="" title="View all" style="margin: auto;width: 50%;text-align: center;display: block;">select</a>
+                                            <h4 class="box-title">{{ follower.idMembre.nom }}{{ follower.idMembre.prenom }}</h4>
+                                        </div>
+                                    </article>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <h2>Following</h2>
+                            {% if user.posts is empty %}
+                                <h2>You are currently not following anyone</h2>
+                            {% endif %}
+                            <div class="row image-box listing-style2">
+                                {% for  follwing in user.followings %}
+                                    <div class="col-sm-6 col-md-4">
+                                        <article class="box">
+                                            <figure style="width: 70px;margin: auto;">
+                                                <div class="avatar">
+                                                    <img src="{{ asset('Uploads/Images/') }}{{ follwing.idMembreFavori.getAvatar() }}" width="20" height="20" alt="">
+                                                </div>
+                                            </figure>
+                                            <div class="details">
+                                                <a class="pull-right button uppercase" href="" title="View all" style="margin: auto;width: 50%;text-align: center;display: block;">select</a>
+                                                <h4 class="box-title">{{ follwing.idMembreFavori.nom }}{{ follwing.idMembreFavori.prenom }}</h4>
+                                            </div>
+                                        </article>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div id="gallery" class="tab-pane fade">
+                        <h2 >Albums</h2>
+                            <ul>
+                                {#  ajout condition profile = connecte#}
+                            <li id="add_album" style=" float: left; display: block;height: 256px;width: 256px;">
+                                <a  class="hover-effect">
+                                    <img src="{{ asset('Uploads/Images/folder.ico') }}" alt="" draggable="false">
+                                    <p class="caption" style="margin-top: -30px; font-size: 1.70em;text-align: center;">Add a new Album</p>
+                                </a>
+                            </li>
+                                <div id="dialog-form" title="Create new album">
+                                    <form>
+                                        <fieldset>
+                                            <label for="name">Name</label>
+                                            <input type="text" name="name" id="name"  class="text ui-widget-content ui-corner-all">
+                                            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                                            <input id="submit_album" type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            <div class="user_albums">
+                                {% for album in user.posts %}
+                                    {% if album.getClassType() == "Album" %}
+
+                                        <li class="user_album" id="{{ album.id }}" style=" float: left; display: block;height: 256px;width: 256px;">
+                                            <a  style="height: 256px;width: 256px;">
+                                                {% if album.medias is empty %}
+                                                    <img src="{{ asset('Uploads/Images/image_vide.png') }}" alt="" draggable="false" style="height: 220px;width: 256px;">
+                                                {% else %}
+                                                    <img src="{{ asset('Uploads/Images/')}}{{ (album.medias|first).file }}" alt="" draggable="false" style="height: 220px;width: 256px;">
+                                                {% endif %}
+                                                <p class="box-title" style="margin-top: 10px; font-size: 1.70em;text-align: center;">{{ album.titre }}</p>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

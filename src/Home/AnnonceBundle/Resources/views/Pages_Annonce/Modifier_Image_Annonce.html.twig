@@ -1,0 +1,28 @@
+{% extends '::master_front.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                {{ form_start(form)}}
+
+                <div class="row">
+                    <div class="form-group col-md-10 no-float no-padding">
+                        <h4 class="title">Do you have photos to share? <small>(Facultative)</small> </h4>
+                        <div class="fileinput full-width">
+                            {{ form_widget(form.file,{'attr': {'class': 'input-text','data-placeholder':'Veuillez choisir vos images'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        {{ form_widget(form.Ajouter, {'attr': {'class': 'btn-large full-width'}}) }}
+                    </div>
+
+                </div>
+
+                {{ form_end(form) }}
+
+        </div>
+    </div>
+
+
+{% endblock %}
+

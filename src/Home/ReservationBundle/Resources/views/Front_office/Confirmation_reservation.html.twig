@@ -1,0 +1,17 @@
+{% extends '::master_front.html.twig' %}
+{% block body %}
+
+    <div align="center" style="background-color:powderblue;color:#0000FF;">
+
+        <i class="soap-icon-card"></i>  <h2 class="tab-content-title">PRIX TOTAL:  {{ reservation.prixTot }} DT</h2>
+
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+<input style="background-color: #FFFFFF;" type="submit" value="Payer les: {{ reservation.prixTot }} DT"  class="button btn-mini dark-blue1"/>
+{{ form_end(form) }}
+
+    </div>
+
+{% endblock %}

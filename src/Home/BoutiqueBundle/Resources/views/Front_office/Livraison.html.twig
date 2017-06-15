@@ -1,0 +1,77 @@
+{% extends '::master_front.html.twig' %}
+
+{% block body %}
+
+    <div class="page-title-container">
+        <div class="container">
+            <div class="page-title pull-left">
+                <h2 class="entry-title">Votre cadeau vient jusqu'à chez vous ! </h2>
+            </div>
+            <ul class="breadcrumbs pull-right">
+                <li><a href="#">ACCUEIL</a></li>
+                <li class="active">DETAILS DU PRODUIT</li>
+            </ul>
+        </div>
+    </div>
+
+    <section id="content" class="gray-area">
+        <div class="container car-detail-page">
+            <div class="row">
+                <div id="main" class="col-md-9">
+
+                    <div class="tab-container">
+                        <ul class="tabs">
+                            <li class="active">
+                                <a href="#car-details" data-toggle="tab">Livraison</a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="car-details">
+                                <div class="intro box table-wrapper full-width hidden-table-sms">
+                                    <div class="col-sm-10 table-cell travelo-box">
+                                        <dl class="term-description">
+
+
+                                            <figure>
+                                            </figure>
+                                        </dl>
+                                    </div>
+                                    <div class="col-sm-10 table-cell">
+                                        <div class="detailed-features clearfix">
+                                            <h4 class="box-title">
+                                                LIVRAISON DU PRODUIT
+                                                <small>Merci pour votre fidélité</small>
+                                            </h4>
+                                            <div class="col-md-6">
+
+                                                <div class="icon-box style11">
+
+                                                    <dl class="details">
+                                                        <form method="POST" action="{{ path('Ajouter_Livraison') }}">
+                                                            <label>Adresse destination</label>
+                                                            <input type="text" name="adresse" id="adresse" class="input-text "> </br>
+                                                            <label>Region</label>
+                                                            <input type="text" name="region" id="region" class="input-text"> </br>
+                                                            <label>code postal</label>
+                                                            <input type="number" name="code_postal" id="code_postal" class="input-text"></br>
+                                                            <label>choisissez la date de votre livraison</label>
+                                                            <input type="date" name="date" id="date" class="input-text" ></br>
+
+
+                                                            <button type="submit" class="button btn-small" data-box="48.856614, 2.352222">Valider</button>
+                                                        </form>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+    </section>
+
+{% endblock %}

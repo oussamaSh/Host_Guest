@@ -1,0 +1,124 @@
+{% extends '::master_front.html.twig' %}
+
+{% block body %}
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Mes réservations
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+
+
+                                <th>Nom de l'hote</th>
+                                <th>Prenom de l'hote</th>
+                                <th>  <div class="icon"><i class="soap-icon-address yellow-color"></i></div>Nom du logement</th>
+                                <th>Prix Totale</th>
+
+                                    <th>
+                                            <div class="icon"><i class="soap-icon-plane-bottom yellow-color"></i></div>
+                                        Date de debut</th>
+
+                                <th> <div class="icon"><i class="soap-icon-plane yellow-color"></i></div> Date de fin</th>
+                                <th>Confirmer la réservation</th>
+                                <th>Annuler la réservation</th>
+                                                            </tr>
+                            </thead>
+                            {% for reservation in reservation %}
+                                <tbody>
+                                <tr>
+                                    <td>{{ reservation.idLogement.idMembre.nom }}</td>
+                                    <td>{{ reservation.idLogement.idMembre.prenom }}</td>
+                                    <td>{{ reservation.idLogement.titreAnnonce }}</td>
+                                    <td>{{ reservation.prixTot}}</td>
+                                    <td>{{ reservation.dateDebut |date ('d/m/Y')}}</td>
+                                    <td>{{ reservation.dateFin|date  ('d/m/Y')}}</td>
+                                     {% if reservation.etat=="Annulé" %}
+                                    <td><div class="action">
+                                        <a class="button btn-small silver" href="{{ path('Confirmer_Reservation',{idReservation:reservation.idReservation}) }}" onclick="return false;">CONFIRMATION IMPOSSIBLE</a>
+                                        </div>
+
+                                    </td>
+                                  <td> <div class="action">
+                                        <a class="button btn-small red" href="{{ path('Refuser_Reservation',{idReservation:reservation.idReservation}) }}" onclick="return false;">RESERVATION ANNULEE</a>
+
+                                    </div></td>
+                                         <td> <div class="action">
+                                                 <a class="button btn-small silver" href="" onclick="return false;">MODIFICATION IMPOSSIBLE</a>
+
+                                             </div></td>
+                                  {% elseif reservation.etat=="Confirmé"%}
+                                      <td><div class="action">
+                                              <a class="button btn-small sea-blue" href="{{ path('Confirmer_Reservation',{idReservation:reservation.idReservation}) }}" onclick="return false;">RESERVATION DEJA CONFIRMER</a>
+                                          </div>
+
+                                      </td>
+                                      <td> <div class="action">
+                                              <a class="button btn-small silver" href="{{ path('Refuser_Reservation',{idReservation:reservation.idReservation}) }}" onclick="return false;">ANNULATION IMPOSSIBLE</a>
+
+                                          </div></td>
+                                      <td> <div class="action">
+                                              <a class="button btn-small sea-blue" href="{{ path('Afficher_facture',{idReservation:reservation.idReservation}) }}" >GENERER LA FACTURE</a>
+
+                                          </div></td>
+                                   {% else %}
+
+
+                                      <td><div class="action">
+                                              <a class="button btn-small dark-blue1" href="{{ path('Confirmer_Reservation',{idReservation:reservation.idReservation}) }}">CONFIRMER</a>
+                                          </div>
+
+                                      </td>
+                                      <td> <div class="action">
+                                              <a class="button btn-small red" href="{{ path('Refuser_Reservation',{idReservation:reservation.idReservation}) }}" onclick="return confirm('Vous etes sur le point d annuler votre reservation: continuer?')">ANNULER</a>
+
+                                          </div></td>
+
+                                         <td> <div class="action">
+                                                 <a class="button btn-small light-orange" href="{{ path('Modifier_Reservations',{idReservation:reservation.idReservation}) }}">MODIFIER</a>
+
+                                             </div></td>
+{% endif %}
+
+                                </tr>
+
+                                </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <blockquote class="style1">
+
+                        NB: Seul les reservations non confirmé peuvent étre annulé
+                         </blockquote>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Host&Guest</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ asset('template_back/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="{{ asset('template_back/vendor/metisMenu/metisMenu.min.css') }}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ asset('template_back/dist/css/sb-admin-2.css') }}" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="{{ asset('template_back/vendor/morrisjs/morris.css') }}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{{ asset('template_back/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
+    <!-- FOSjsRoutingBundle-->
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-3.1.1.js') }}"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+{% if is_granted('ROLE_ADMIN') %}
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">Host&Guest</a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-messages">
+
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>Nom Prenom</strong>
+                                <span class="pull-right text-muted">
+                                        <em>Date</em>
+                                    </span>
+                            </div>
+                            <div>Message</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>Nom Prenom</strong>
+                                <span class="pull-right text-muted">
+                                        <em>Date</em>
+                                    </span>
+                            </div>
+                            <div>Message</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>Afficher la suite</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-messages -->
+            </li>
+            <!-- /.dropdown -->
+
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-fw"></i> Déconnexion</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="sidebar-search">
+
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-home fa-fw"></i> Annonce<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ path('Liste_Annonces') }}">Afficher les annonces</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('Liste_Message_Annonces') }}">Afficher les messages reçus</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('MailAnnonce') }}">Répondre un utilisateur</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('StatAnnonce') }}">Consulter les statistiques des annonces</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-calendar-o  fa-fw"></i> Réservation<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ path('Afficher_Reservations') }}">Afficher les réservations</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('Rechercher_Reservations') }}">Rechercher une réservation</a>
+                            </li>
+
+                            <li>
+                                <a href="#">Consulter les statistiques sur les réservations<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="{{ path('Stat_reservation') }}">Statistique sur le prix</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('Stat_facture') }}">Statistique sur les nombres de nuits</a>
+                                    </li>
+
+
+                                </ul>
+                                <!-- /.nav-third-level -->
+                            </li>
+
+
+
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa  fa-bank    fa-fw"></i> Facture<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ path('Afficher_Factures') }}">Afficher les factures</a>
+                            </li>
+
+
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-envelope-o fa-fw"></i> Réclamation<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ path('Afficherreclamationback_route') }}">Afficher les Réclamations</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('Recherche_reclamation_back_route') }}">Rechercher une Réclamation</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('statistique_route') }}">Consulter les statistiques sur les Réclamations</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa  fa-star-o   fa-fw"></i> Avis<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Rechercher un avis</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('Show_signalement') }}">Les Avis Signaler </a>
+                            </li>
+                            <li>
+                                <a href="#">Afficher les Avis<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="{{ path('Show_AvisHost') }}">Avis host</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Avis guest</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('AvisRoute') }}">Avis annonce</a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.nav-third-level -->
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+
+
+                    <li>
+                        <a href="#"><i class="fa fa-bookmark-o    fa-fw"></i> Badge<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ path('AfficherBadge_route') }}">Afficher les badges</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('Ajout_route') }}">Ajouter un badge</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('chart') }}">Consulter les statistiques sur les badges</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('Affecter_route') }}">Affectation Badge</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+
+                    <li>
+                        <a href="#">Produits<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a href="{{ path('Ajout_produit') }}">Ajouter un produit</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('Liste_produit') }}">Afficher les produits</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('Afficher_Achats') }}">Afficher listes des achats</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('Recherche_produit') }}">Rechercher un produit</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('chart') }}">Consulter les statistiques sur les produits</a>
+                            </li>
+
+
+
+                        </ul>
+                        <!-- /.nav-third-level -->
+                    </li>
+
+                    <li>
+                        <a href="#">Livraisons<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a href="{#{{ path('Afficher_Achats') }}#}">Afficher les livraisons</a>
+                            </li>
+                            <li>
+                                <a href="#">Rechercher une livraison</a>
+                            </li>
+
+                        </ul>
+                        <!-- /.nav-third-level -->
+                    </li>
+
+                <!-- /.nav-second-level -->
+
+
+                    <li>
+                        <a href="#"><i class="fa  fa-bell      fa-fw"></i> Notification<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ path('Affichermodelnotification_route') }}">Afficer les modeles de notifications</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('Ajoutmodelnotification_route') }}">Ajouter les modeles de notifications </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('RechercheModelNotif') }}">Rechercher les modeles de notifications</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                </ul>
+
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+</div>
+
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">Espace administrateur</h3>
+        </div>
+        <!-- /.col-lg-12 -->
+
+        {% block body %}
+
+        {% endblock %}
+    </div>
+
+</div>
+<!-- /#wrapper -->
+
+
+
+
+<!-- jQuery -->
+<script src="{{ asset('template_back/vendor/jquery/jquery.min.js') }}"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="{{ asset('template_back/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="{{ asset('template_back/vendor/metisMenu/metisMenu.min.js') }}"></script>
+
+<!-- Morris Charts JavaScript -->
+<script src="{{ asset('template_back/vendor/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('template_back/vendor/morrisjs/morris.min.js') }}"></script>
+<script src="{{ asset('template_back/data/morris-data.js') }}"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="{{ asset('template_back/dist/js/sb-admin-2.js') }}"></script>
+
+</body>
+    {% else %}
+    <div>
+        <h1 style="color: red">Accés refusé!!</h1>
+    </div>
+{% endif %}
+
+</html>

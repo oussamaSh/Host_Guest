@@ -1,0 +1,12 @@
+{% extends 'master_back.html.twig' %}
+    {% block body %}
+        <form  action="{{ path ('Affecter_route') }}" method="POST">
+      <button type="submit">Reservation</button>
+       </form>
+
+{#  <button><a href="{{ path ('myapplication_contact')}}"> Send Newsletter</a></button>#}
+
+        {#
+        <button><a href="{{ path ('subscribe')}}"> recevoir Newsletter</a></button>
+#}
+    {% endblock %}

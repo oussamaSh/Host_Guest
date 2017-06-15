@@ -1,0 +1,168 @@
+{%  extends '::master_front.html.twig' %}
+{% block body %}
+    <script src="{{ asset('js/jquery-3.1.1.js') }}"></script>
+    <section id="content" class="gray-area">
+
+    <div class="form-group col-lg-6 col-lg-offset-3">
+        <label for="keyword">Rechercher:</label>
+        <select id="keyword">
+            <option value="" selected>Type</option>
+            <option value="Host" >Host</option>
+            <option value="Guest">Guest</option>
+            <option value="Livraison" >Livraison</option>
+            <option value="Annonce">Annonce</option>
+        </select>
+
+        <select id="keyword1">
+            <option value="" selected>Etat</option>
+            <option value="En cours">En cours</option>
+            <option value="Cloture">Cloturé</option>
+        </select>
+
+        <input type="date" id="keyword2">
+    </div>
+
+        <div class="container text-left shortcode">
+            <div class="block">
+                <div class="row">
+                    <div class="col-lg-3 pull-right">
+                        <h1>Une réclamation?</h1>
+                        <p> Si vous avez une réclamation à nous faire parvenir concernant une annonce,une livraison ... ,n’hésitez surtout pas à nous en faire part.
+                            Le Service Relations Clientèle mettra tout en œuvre pour vous apporter une réponse rapide et efficace.
+                            Nous vous remercions de nous faire part de vos suggestions, vos appréciations, et vos réclamations.
+                        </p>
+                    </div>
+                    <div class="col-lg-9 listing-style3 flight" id="result">
+                        {% for reclamation in reclamations %}
+                            <article class="box">
+
+                                <div class="details col-xs-9 col-sm-10">
+                                    <div class="details-wrapper">
+                                        <div class="first-row">
+                                            <div>
+                                                <h4 class="box-title">Reclamation<small>{{ reclamation.idMembre.nom }}  {{ reclamation.idMembre.prenom }}</small></h4>
+                                                {% if reclamation.etat!="Cloture" %}
+                                                    <a class="button btn-mini yellow" href="{{ path('Cloturer_reclamationfront_route',{idReclamation:reclamation.idReclamation}) }}" >Cloturer</a>
+                                                {% else %}
+                                                    <a class="button btn-mini yellow" href="" onclick="return false;">Cloturer</a>
+                                                {% endif %}
+                                            </div>
+                                            <div class="action">
+                                                <a href="{{ path('Supprimer_reclamationfront_route',{idReclamation:reclamation.idReclamation}) }}" class="button btn-medium green" onclick="return(confirm('Etes-vous sur de vouloir supprimer cette ligne?'))">Supprimer</a>
+                                            </div>
+                                        </div>
+                                        <div class="second-row">
+                                            <div class="time">
+                                                <div class="take-off col-sm-4">
+                                                    <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
+                                                    <div>
+                                                        <span class="skin-color">Date</span><br />{{ reclamation.dateReclamation|date("Y-m-d") }}
+                                                    </div>
+                                                </div>
+                                                <div class="landing col-sm-4">
+                                                    <div class="icon"><i class="soap-icon-key yellow-color"></i></div>
+                                                    <div>
+                                                        <span class="skin-color">Sujet</span><br />{{ reclamation.sujetReclamation }}
+                                                    </div>
+                                                </div>
+                                                <div class="total-time col-sm-4">
+                                                    <div class="icon"><i class="soap-icon-insurance yellow-color"></i></div>
+                                                    <div>
+                                                        <span class="skin-color">Etat</span><br />{{ reclamation.etat }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="action">
+                                                <a href="{{ path('Affichermessagefront_route',{idReclamation:reclamation.idReclamation}) }}" class="button btn-medium green">Afficher</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+
+    <script>
+        $(function(){
+
+            var searchField = $('#keyword1');
+            var searchField1 = $('#keyword');
+            var searchField2 = $('#keyword2');
+            var reclamationDiv = $('#result');
+
+            var delay = (function(){
+                var timer = 0;
+                return function(callback, ms){
+                    clearTimeout (timer);
+                    timer = setTimeout(callback, ms);
+                };
+            })();
+
+            searchField.change(function(evt){
+
+                var array = {'key' : searchField.val(),'key2':searchField1.val(),'key3':searchField2.val()};
+
+
+                $.ajax({
+                    url: '{{ path('Recherche_reclamation_front_Ajax_route') }}',
+                    method: "POST",
+                    data: array,
+                    dataType: 'html',
+                    success: function(result) {
+                        var parsedData =result;
+                        reclamationDiv.fadeOut(function() {
+                            reclamationDiv.empty();
+                            reclamationDiv.html(parsedData).fadeIn();
+                        });
+                    }
+                });
+
+            });
+
+            searchField1.change(function(evt){
+
+                var array = {'key' : searchField.val(),'key2':searchField1.val(),'key3':searchField2.val()};
+                $.ajax({
+                    url: '{{ path('Recherche_reclamation_front_Ajax_route') }}',
+                    method: "POST",
+                    data: array ,
+                    dataType: 'html',
+                    success: function(result) {
+                        var parsedData =result;
+                        reclamationDiv.fadeOut(function() {
+                            reclamationDiv.empty();
+                            reclamationDiv.html(parsedData).fadeIn();
+                        });
+                    }
+                });
+            });
+
+            searchField2.change(function(evt){
+
+                var array = {'key' : searchField.val(),'key2':searchField1.val(),'key3':searchField2.val()};
+                $.ajax({
+                    url: '{{ path('Recherche_reclamation_front_Ajax_route') }}',
+                    method: "POST",
+                    data: array ,
+                    dataType: 'html',
+                    success: function(result) {
+                        var parsedData =result;
+                        reclamationDiv.fadeOut(function() {
+                            reclamationDiv.empty();
+                            reclamationDiv.html(parsedData).fadeIn();
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
+
+{% endblock %}

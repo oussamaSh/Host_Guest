@@ -1,0 +1,4 @@
+services:
+#    home_livraison.example:
+#        class: Home\LivraisonBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

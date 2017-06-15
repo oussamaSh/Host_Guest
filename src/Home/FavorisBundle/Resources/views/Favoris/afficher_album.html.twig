@@ -1,0 +1,37 @@
+<script type="text/javascript" src="{{ asset('dist/js/FavorisJS/profile.js') }}"></script>
+<h2 class="retour_album">Albums</h2>
+<ul>
+    {#  ajout condition profile = connecte#}
+    <li id="add_media" style=" float: left; display: block;height: 256px;width: 256px;">
+        <a  class="hover-effect">
+            <img src="{{ asset('Uploads/Images/add_image.png') }}" alt="" draggable="false" style="height: 256px;width: 256px;">
+            <p class="caption" style="margin-top: -10px; font-size: 1.70em;text-align: center;">Add new content</p>
+        </a>
+    </li>
+    <div id="file-form" title="Add new media">
+        <form id="multipleform">
+            <div class="col-md-4">
+                <input id="multipleupload" name="files[]" type="file" multiple />
+            </div>
+
+        </form>
+        {{ form_start(form) }}
+        {{ form_row(form.file) }}
+        {{ form_end(form) }}
+
+    </div>
+    <div class="user_albums">
+        {% for image in images %}
+
+
+                <li class="user_album" id="{{ album.id }}" style=" float: left; display: block;height: 256px;width: 256px;">
+                    <a  style="height: 256px;width: 256px;">
+
+                        <img src="{{ asset('Uploads/Images/')}}{{ (album.medias|first).file }}" alt="" draggable="false" style="height: 220px;width: 256px;">
+                        <p class="box-title" style="margin-top: 10px; font-size: 1.70em;text-align: center;">{{ album.titre }}</p>
+                    </a>
+                </li>
+        {% endfor %}
+
+    </div>
+</ul>

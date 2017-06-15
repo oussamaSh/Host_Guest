@@ -1,0 +1,64 @@
+{% extends '::master_back.html.twig' %}
+
+{% block body %}
+{{ form (Form) }}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Liste des reservations
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Montant</th>
+                                <th>Description</th>
+                                <th>Etat</th>
+                                <th>Date de debut du séjour</th>
+                                <th>Date de fin du séjour</th>
+                                <th>Titre du logement</th>
+                                <th>Nom du visiteur</th>
+                                <th>Prenom du visiteur</th>
+                                <th>Supprimer</th>
+                            </tr>
+                            </thead>
+                            {% for facture in factures %}
+                                <tbody>
+                                <tr>
+                                    <td>{{ facture.idFacture }}</td>
+                                    <td>{{ facture.montant }}</td>
+                                    <td>{{ facture.description }}</td>
+                                    <td>{{ facture.etat }}</td>
+                                    <td>{{ facture.idReservation.dateDebut |date }}</td>
+                                    <td>{{ facture.idReservation.dateFin |date }}</td>
+                                    <td>{{ facture.idReservation.idLogement.titreAnnonce }}</td>
+                                    <td>{{ facture.idMembre.nom }}</td>
+                                    <td>{{ facture.idMembre.prenom }}</td>
+                                    <td><a href="{{ path('Supprimer_Factures',{idFacture:facture.idFacture}) }}"><button type="button" class="btn btn-danger btn-circle" ><i class="fa fa-times"></i>
+                                            </button></a></td>
+
+
+                                </tr>
+
+                                </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+
+
+    </div>
+
+
+
+{% endblock %}

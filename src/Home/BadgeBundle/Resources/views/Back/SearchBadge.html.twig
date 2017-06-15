@@ -1,0 +1,26 @@
+{% extends 'master_back.html.twig' %}
+{% if badges %}
+    {% block body %}
+        {% for key,badge in badges %}
+            <div class ="col-lg-4">
+
+                <img alt="embeded image"src="data:image/png;base64,{{ images[key] }}" /></a>
+
+                <div >
+                    <article class="box">
+                        <figure>
+                            <a href="{{ asset('bundles/template_front/ajax/slideshow-popup.html') }}" class="hover-effect popup-gallery"></a>
+                        </figure>
+                        <div class="details">
+
+                            <h4 class="box-title">{{ badge.titre}}</h4>
+                            <h6 class="box-title">{{ badge.descriptionBadge}}</h6>
+                            <button><a href="{{ path ('Badge_supprimer',{id:badge.idModelbadge}) }}"> supprimer</a></button>
+                            <button><a href="{{ path ('Badge_modifier',{id:badge.idModelbadge}) }}"> Modifier</a></button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}
+{% endif %}

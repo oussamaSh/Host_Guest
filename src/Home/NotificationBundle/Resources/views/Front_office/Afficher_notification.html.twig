@@ -1,0 +1,58 @@
+{%  extends '::master_front.html.twig' %}
+
+{% block body %}
+    <section id="content" class="gray-area">
+    <div class="block">
+        <div class="row">
+
+            <div class="col-lg-3 ">
+                <img src="{{ asset('images/bb.jpg') }}"  height="420" width="300">
+            </div>
+    <div class="col-lg-6 ">
+    <div class="travelo-box book-with-us-box">
+        <ul>
+            {% for notification in notifications %}
+                <li>
+
+                    <i class="soap-icon-places circle"></i>
+                    <a class="soap-icon-close pull-right" href="{{ path('Suprrimernotification_route',{idNotification:notification.idNotification}) }}" onclick="return(confirm('Etes-vous sur de vouloir supprimer cette ligne?'))"></a>
+                    <h4 class="title"><a href="" id="delete-btn" title="delete" href data-toggle="modal" data-target="#myModal" data-entity-id="{{ notification.idNotification }}" >{{ notification.typeNotification }}</a></h4>
+
+                    <p>{{ notification.contenuNotification }} <br>
+                        {{ notification.dateNotification|date }}</p>
+
+                </li>
+
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Notification</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <p  style="color: #ac2925">{{ notification.typeNotification }}</p>
+                                <p>{{ notification.contenuNotification }}</p>
+                                <p>{{ notification.dateNotification|date }}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </ul>
+    </div>
+    </div>
+            <div class="col-lg-3 ">
+                <img src="{{ asset('images/cc.jpg') }}"  height="420" width="300">
+            </div>
+    </div>
+    </div>
+
+
+    </section>
+
+{%  endblock %}

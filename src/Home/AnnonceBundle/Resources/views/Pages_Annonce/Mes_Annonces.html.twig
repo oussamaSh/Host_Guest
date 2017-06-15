@@ -1,0 +1,165 @@
+{% extends '::master_front.html.twig' %}
+
+{% block body %}
+
+    <section id="content">
+        <div class="container">
+            <div id="main">
+                <div class="row">
+
+                    <div class="col-sm-8 col-md-12">
+                        <!-- <div class="sort-by-section clearfix">
+                             <h4 class="sort-by-title block-sm">Sort results by:</h4>
+                             <ul class="sort-bar clearfix block-sm">
+                                 <li class="sort-by-name"><a class="sort-by-container" href="#"><span>name</span></a></li>
+                                 <li class="sort-by-price"><a class="sort-by-container" href="#"><span>price</span></a></li>
+                                 <li class="clearer visible-sms"></li>
+                                 <li class="sort-by-rating active"><a class="sort-by-container" href="#"><span>rating</span></a></li>
+                                 <li class="sort-by-popularity"><a class="sort-by-container" href="#"><span>popularity</span></a></li>
+                             </ul>
+
+                             <ul class="swap-tiles clearfix block-sm">
+                                 <li class="swap-list active">
+                                     <a href="hotel-list-view.html"><i class="soap-icon-list"></i></a>
+                                 </li>
+                                 <li class="swap-grid">
+                                     <a href="hotel-grid-view.html"><i class="soap-icon-grid"></i></a>
+                                 </li>
+                                 <li class="swap-block">
+                                     <a href="hotel-block-view.html"><i class="soap-icon-block"></i></a>
+                                 </li>
+                             </ul>
+                         </div>-->
+                        <div class="hotel-list listing-style3 hotel" id="div">
+                            <h3 class="title-container">Liste de vos annonces</h3>
+                            {% for annonce in annonces %}
+                                <article class="box">
+                                    {% for image in annonce.pictures %}
+                                        {% if loop.first %}
+                                            <figure class="col-sm-5 col-md-4">
+                                                <a href="{{path('Slideshow_popup',{'idLogement':annonce.idLogement}) }}" class="hover-effect popup-gallery"><img width="270" height="160" alt="" src="{{ asset('uploads/' ~ image.path) }}" ></a>
+                                            </figure>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <div class="details col-sm-7 col-md-8">
+                                        <div>
+                                            <div>
+                                                <h4 class="box-title"><a href="{{ path('Affiche_Details_Annonce',{'idLogement':annonce.idLogement}) }}">{{ annonce.titreAnnonce }}</a><small><i class="soap-icon-departure yellow-color"></i> {{ annonce.region }}, {{ annonce.paysLogement }}</small></h4>
+                                                <div class="amenities">
+                                                    <i class="soap-icon-wifi circle"></i>
+                                                    <i class="soap-icon-fitnessfacility circle"></i>
+                                                    <i class="soap-icon-fork circle"></i>
+                                                    <i class="soap-icon-television circle"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="five-stars-container">
+                                                    <span class="five-stars" style="width: 80%;"></span>
+                                                </div>
+                                                <span class="review">270 reviews</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p>{{ annonce.descriptionLogement[0:150] }}{% if annonce.descriptionLogement|length > 150 %}...{% endif %}</p>
+                                            <div>
+                                                <span class="price">{{ annonce.prixLogement }} DT<small>/Nuit</small></span>
+
+                                                <a class="button btn-small full-width text-center"  href="{{ path('Modifier_Annonce',{'idLogement':annonce.idLogement}) }}">MODIFIER</a>
+                                                <a class="button btn-small red full-width text-center delete-btn" title="delete" href data-toggle="modal" data-target="#myModal" id="{{ annonce.idLogement }}">SUPPRIMER</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                <div class="modal fade" id="myModal" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Suppression</h4>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <p>Voulez vous vraiment supprimer cette annonce ?</p>
+                                                <p style="color: #ac2925">Cette action est irreversible!</p>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <a class="button btn-small  text-center" data-dismiss="modal">Annuler</a>
+                                                <a class="button btn-small red  text-center remove_item"  >Supprimer</a>
+                                            </div>
+                                            <input id="remove" hidden>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+                        </div>
+                      <!--  <a href="#" class="uppercase full-width button btn-large">load more listing</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <script>
+        $(document).ready(function () {
+
+            $(".delete-btn").click(function(e){
+                var entityId = e.target.id;
+                $(".delete-btn").addClass('toremove');
+                $("#remove").val(entityId);
+                console.log(entityId);
+            });
+            $(".remove_item").click(function () {
+
+                var entityId =   $("#remove").val();
+                console.log(entityId);
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'html',
+                    url: Routing.generate('Supprimer_Annonce',{'idLogement':entityId}),
+                    success: function (resultat) {
+                        $(".delete-btn").removeClass('toremove');
+                        // jQuery("#div").reload();
+                        //window.location.reload();
+
+                        jQuery('#myModal').modal('hide');
+                        jQuery("#div").fadeOut(function() {
+                            jQuery("#div").empty();
+                        });
+                        jQuery("#div").fadeIn(function() {
+                            jQuery("#div").html(resultat).fadeIn();
+                        });
+
+                    }
+                });
+
+            });
+
+
+        });
+
+        /*
+
+         $(document).ready(function() {
+         $('a[data-confirm]').click(function(ev) {
+         var href = $(this).attr('href');
+
+         if (!$('#dataConfirmModal').length) {
+         $('body').append('<div id="dataConfirmModal" class="modal" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="dataConfirmLabel">Please Confirm</h3></div><div class="modal-body"></div><div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button><a class="btn btn-primary" id="dataConfirmOK">OK</a></div></div>');
+         }
+         $('#dataConfirmModal').find('.modal-body').text($(this).attr('data-confirm'));
+         $('#dataConfirmOK').attr('href', href);
+         $('#dataConfirmModal').modal({show:true});
+         return false;
+         });
+         });
+         */
+
+    </script>
+{% endblock %}

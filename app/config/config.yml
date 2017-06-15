@@ -1,0 +1,124 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: "@HomeReclamationBundle/Resources/config/services.yml" }
+    - { resource: "@HomeReservationBundle/Resources/config/services.yml" }
+    - { resource: "@HomeNotificationBundle/Resources/config/services.yml" }
+    - { resource: "@HomeAvisBundle/Resources/config/services.yml" }
+    - { resource: "@HomeBadgeBundle/Resources/config/services.yml" }
+    - { resource: "@HomeNewslettersBundle/Resources/config/services.yml" }
+    - { resource: "@HomeAnnonceBundle/Resources/config/services.yml" }
+    - { resource: "@HomeBoutiqueBundle/Resources/config/services.yml" }
+    - { resource: "@HomeLivraisonBundle/Resources/config/services.yml" }
+    - { resource: "@HomeFavorisBundle/Resources/config/services.yml" }
+    - { resource: "@HomeUserBundle/Resources/config/services.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: fr
+
+framework:
+    #esi: ~
+    translator: { fallbacks: ['%locale%'] }
+    secret: '%secret%'
+    router:
+        resource: '%kernel.root_dir%/config/routing.yml'
+        strict_requirements: ~
+    form: ~
+    csrf_protection: ~
+    validation: { enable_annotations: true }
+    serializer: { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale: '%locale%'
+    trusted_hosts: ~
+    trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments: ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    globals:
+        fos_csrf_provider: "@security.csrf.token_manager"
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
+        charset: UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/../var/data/data.sqlite"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #path: '%database_path%'
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    encryption: "%mailer_encryption%"
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    port: 465
+    disable_delivery: false
+    auth_mode: login
+    spool: { type: memory }
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: Home\UserBundle\Entity\User
+    from_email:
+          address: "oussama.shili@esprit.tn"
+          sender_name: "oussama"
+    registration:
+        form:
+            type: Home\UserBundle\Form\UserType
+
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
+        sortable: 'KnpPaginatorBundle:Pagination:sortable_link.html.twig' # sort link template
+
+
+jms_payment_core:
+    encryption:
+        secret: def0000037f364515fc81042c7e77d7efc3c2a7d6fd9b9159957b78912d409646f981a12223d6cb39da1f404bed7ff88848cf0a4779fa99cee9e2e9afdc1de453d396c8d
+
+jms_payment_paypal:
+    username: oumayma.gader-facilitator_api1.esprit.tn
+    password: NCV5NFYN7CCDKKDP
+    signature: AFcWxV21C7fd0v3bYYYRCpSSRl31AeXoL4zBmWuXSTjpfih4DMKyKrBy
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""

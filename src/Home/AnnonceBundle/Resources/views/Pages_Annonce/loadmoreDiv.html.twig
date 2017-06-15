@@ -1,0 +1,30 @@
+{% for annonce in annonces %}
+    <div class="col-sm-6 col-md-4" id="loadmoreDiv">
+        <article class="box">
+            {% for image in annonce.pictures %}
+                {% if loop.first %}
+                    <figure>
+                        <a href="{{path('Slideshow_popup',{'idLogement':annonce.idLogement}) }}" class="hover-effect popup-gallery"><img width="270" height="160" alt="" src="{{ asset('uploads/' ~ image.path) }}" ></a>
+                    </figure>
+                {% endif %}
+            {% endfor %}
+            <div class="details">
+                                                <span class="price">
+                                                    {{ annonce.prixLogement }} DT
+                                                    <small>/Nuit</small>
+                                                </span>
+                <h4 class="box-title" style="white-space:nowrap;">{{ annonce.titreAnnonce[0:20] }}{% if annonce.titreAnnonce|length > 20 %}...{% endif %}<small>{{ annonce.region }} {{ annonce.paysLogement }}</small></h4>
+                <div class="feedback">
+                    <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="4 stars"><span style="width: 80%;" class="five-stars"></span></div>
+                    <span class="review">270 reviews</span>
+                </div>
+                <p class="description">{{ annonce.descriptionLogement[0:50] }}{% if annonce.descriptionLogement|length > 50 %}...{% endif %}</p>
+                <div class="action">
+                    <a class="button btn-small" href="{{ path('Affiche_Details_Annonce',{'idLogement':annonce.idLogement}) }}">SELECT</a>
+                    <a class="button btn-small yellow popup-map" href="#" data-box="48.856614, 2.352222">VIEW ON MAP</a>
+                </div>
+            </div>
+        </article>
+
+    </div>
+{% endfor %}

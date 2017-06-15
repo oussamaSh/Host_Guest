@@ -1,0 +1,22 @@
+{% extends 'master_back.html.twig' %}
+
+    {% block body %}
+
+        {{ form(form) }}
+        {% for badge in badges %}
+            <div class ="col-lg-4">
+
+
+                <figure>
+                    <img alt="" src="{{ asset('uploads/' ~ badge.path) }}" height="80" width="80" />
+                </figure>
+                            <h4 class="box-title">{{ badge.titre}}</h4>
+                            <h6 class="box-title">{{ badge.descriptionBadge}}</h6>
+                <button><a href="{{ path ('Badge_supprimer',{id:badge.idModelbadge}) }}"> supprimer</a></button>
+                <button><a href="{{ path ('Badge_modifier',{id:badge.idModelbadge}) }}"> Modifier</a></button>
+
+                        </div>
+
+        {% endfor %}
+    {% endblock %}
+

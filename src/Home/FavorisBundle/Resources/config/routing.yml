@@ -1,0 +1,52 @@
+Test:
+    path:    /
+    defaults: { _controller: HomeFavorisBundle:Default:index }
+Afficher_Feed_Favoris:
+      path:    /feed
+      defaults: { _controller: HomeFavorisBundle:Favoris:AfficherFeedFavoris}
+Ajouter_commentaire:
+      path:    /feed/add_comment/{id}/{contenu}
+      defaults: { _controller: HomeFavorisBundle:Favoris:Ajouter_commentaire}
+Ajouter_like:
+      path:    /feed/likepost
+      defaults: { _controller: HomeFavorisBundle:Favoris:LikePostUser}
+Supprimer_like:
+      path:    /feed/unlikepost
+      defaults: { _controller: HomeFavorisBundle:Favoris:unLikePostUser}
+AfficherProfileUser:
+      path:    /feed/profile/{id}
+      defaults: {_controller: HomeFavorisBundle:Favoris:AfficherProfileUser}
+Ajouter_status:
+      path:    /feed/addstatus
+      defaults: {_controller: HomeFavorisBundle:Favoris:AjouterStatus}
+
+Supprimer_status:
+      path:    /feed/removestatus
+      defaults: {_controller: HomeFavorisBundle:Favoris:SupprimerStatus}
+Jquery_uploader:
+      path:    /feed/jquploader
+      defaults: {_controller: HomeFavorisBundle:Favoris:Jquery_uploader}
+ImgUploader:
+      path:    /feed/uploader
+      defaults: {_controller: HomeFavorisBundle:Favoris:Uploader}
+Ajouter_Album:
+      path:    /feed/addalbum
+      defaults: {_controller: HomeFavorisBundle:Favoris:AjouterAlbum}
+Afficher_Album:
+      path:    /feed/openalbum
+      defaults: {_controller: HomeFavorisBundle:Favoris:AfficherAlbum}
+Ajouter_Media:
+      path:    /feed/addmedia
+      defaults: {_controller: HomeFavorisBundle:Favoris:AjouterMedia}
+Afficher_Commentaire:
+      path:    /user/admin_home
+      defaults: {_controller: HomeFavorisBundle:Favoris:AfficherbackCommentaire}
+Afficher_Statistique:
+      path:    /user/admin_home/stat
+      defaults: {_controller: HomeFavorisBundle:Favoris:AfficherStat}
+Send_Message:
+      path:    /feed/sendmessage
+      defaults: {_controller: HomeFavorisBundle:Favoris:SendMessage}
+refresh_Message:
+      path:    /feed/refresh
+      defaults: {_controller: HomeFavorisBundle:Favoris:refresh}

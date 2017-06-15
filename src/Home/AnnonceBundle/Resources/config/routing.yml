@@ -1,0 +1,126 @@
+Accueil:
+    path:    /Accueil
+    defaults: { _controller: HomeAnnonceBundle:Annonce:Accueil }
+
+Accueil_Annonces:
+    path:    /AccueilAnnonces
+    defaults: { _controller: HomeAnnonceBundle:Annonce:AccueilAnnonces }
+
+findImage:
+    path:    /AccueilAnnonces
+    defaults: { _controller: HomeAnnonceBundle:Annonce:findImage }
+
+Affiche_Details_Annonce:
+    path:    /AffichageAnnonce/{idLogement}
+    defaults: { _controller: HomeAnnonceBundle:Annonce:AffichageDetailsAnnonce }
+
+Mes_Annonces:
+    path:    /MesAnnonces
+    defaults: { _controller: HomeAnnonceBundle:Annonce:AffichageMesAnnonces }
+
+ContactUs:
+      path:    /ContactUs
+      defaults: { _controller: HomeAnnonceBundle:Annonce:ContactUs }
+
+
+Rechercher:
+      path:    /RechercherAnnonce
+      defaults: { _controller: HomeAnnonceBundle:Annonce:Rechercher }
+
+
+ajax_search:
+      path:    /search
+      defaults: { _controller: HomeAnnonceBundle:Annonce:search }
+
+rechTest:
+      path:    /rechTest
+      defaults: { _controller: HomeAnnonceBundle:Annonce:rechTest }
+
+loadMoreDiv:
+      path:    /loadMoreDiv
+      defaults: { _controller: HomeAnnonceBundle:Annonce:loadmore }
+
+
+Ajouter_Annonce:
+      path:    /AjouterAnnonce
+      defaults: { _controller: HomeAnnonceBundle:Annonce:AjouterAnnonce }
+
+Ajouter_Image_Annonce:
+      path:    /Ajouter_Image_Annonce
+      defaults: { _controller: HomeAnnonceBundle:Annonce:AjouterImageAnnonce }
+
+Modifier_Annonce:
+      path:    /ModifierAnnonce/{idLogement}
+      defaults: { _controller: HomeAnnonceBundle:Annonce:ModifierAnnonce }
+
+ModifierImage:
+      path:    /ModifierImage/{idImage}
+      defaults: { _controller: HomeAnnonceBundle:Annonce:ModifierImage }
+
+SupprimerImageAnnonce:
+      path:    /SupprimerImageAnnonce/{idImage}
+      defaults: { _controller: HomeAnnonceBundle:Annonce:SupprimerImageAnnonce }
+      options:
+          expose: true
+
+Ajouter_Equipement:
+      path:    /AjouterEquipement
+      defaults: { _controller: HomeAnnonceBundle:Annonce:AjoutEquipements }
+
+Supprimer_Annonce:
+    path: /Supression/{idLogement}
+    defaults: { _controller: HomeAnnonceBundle:Annonce:SupprimerAnnonce}
+    options:
+        expose: true
+
+Supprimer_Annonce_Back:
+    path: /SupressionBack/{idLogement}
+    defaults: { _controller: HomeAnnonceBundle:Annonce:SupprimerAnnonceBack}
+    options:
+        expose: true
+
+afterDelete:
+    path: /afterDelete
+    defaults: { _controller: HomeAnnonceBundle:Annonce:afterDelete}
+
+
+Slideshow_popup:
+    path: /slideshowPopup/{idLogement}
+    defaults: { _controller: HomeAnnonceBundle:Annonce:SlideshowPopup}
+
+Liste_Annonces:
+      path:    /ListeAnnonces
+      defaults: { _controller: HomeAnnonceBundle:Annonce:AffichageListeAnnonces }
+
+Recherche_Back_Annonce:
+      path:    /RechercheBack
+      defaults: { _controller: HomeAnnonceBundle:Annonce:RechercheBack }
+
+Statistiques_Annonce:
+      path:    /StatistiquesAnnonce
+      defaults: { _controller: HomeAnnonceBundle:Annonce:StatistiquesAnnonces }
+
+
+TitreAjax:
+      path:    /TitreAjax
+      defaults: { _controller: HomeAnnonceBundle:Annonce:TitreAnnonceAjax }
+
+MailAnnonce:
+      path: /MailAnnonce
+      defaults: { _controller: HomeAnnonceBundle:MailAnnonce:index }
+
+my_app_mail_accuse:
+      path: /success
+      defaults: { _controller: HomeAnnonceBundle:MailAnnonce:success }
+
+Liste_Message_Annonces:
+      path:    /Liste_Message_Annonces
+      defaults: { _controller: HomeAnnonceBundle:MailAnnonce:AffichageListeMessages }
+
+StatAnnonce:
+      path: /StatAnnonce
+      defaults: { _controller: HomeAnnonceBundle:StatAnnonce:chart}
+
+Avis_signaler:
+    path:     /signaler/{id}/{idlogement}
+    defaults: { _controller: HomeAnnonceBundle:Avis:SignalerAvis}

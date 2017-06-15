@@ -1,0 +1,199 @@
+{% extends '::master_back.html.twig' %}
+
+{% block body %}
+<div class="col-lg-offset-2" >
+    <div class="form-group col-lg-6 " >
+        <label for="keyword">Rechercher:</label>
+        <input type="text" class="form-control" id="keyword" placeholder="Rechercher">
+    </div>
+    <div class="form-group col-lg-3 ">
+
+        <label for="cbRegion">Region</label>
+
+            <select class="form-control" id="cbRegion" >
+                <option value="" selected>Tous</option>
+                <option value="Sousse">Sousse</option>
+                <option value="Tunis">Tunis</option>
+                <option value="Ariana">Ariana</option>
+                <option value="Sfax">Sfax</option>
+                <option value="Bizerte">Bizerte</option>
+                <option value="Nabeul">Nabeul</option>
+                <option value="Kef">Kef</option>
+                <option value="Beja">Beja</option>
+            </select>
+
+    </div>
+</div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Liste des annonces
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="resultat">
+                        <thead>
+                        <tr>
+
+                            <th>Id</th>
+                            <th>Titre</th>
+                            <th>Adresse</th>
+                            <th>Description</th>
+                            <th>Reglement</th>
+                            <th>Region</th>
+                            <th>Pays</th>
+                          <!--  <th>Hote</th>-->
+                            <th>Afficher</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for annonce in annonces %}
+                            <tr>
+
+                                <td>{{ annonce.idLogement }}</td>
+                                <td>{{ annonce.titreAnnonce }}</td>
+                                <td>{{ annonce.adresseLogement }}</td>
+                                <td>{{ annonce.descriptionLogement[0:30] }}{% if annonce.descriptionLogement|length > 30 %}...{% endif %}</td>
+                                <td>{{ annonce.reglementLogement[0:30] }}{% if annonce.reglementLogement|length > 30 %}...{% endif %}</td>
+                                <td>{{ annonce.region }}</td>
+                                <td>{{ annonce.paysLogement }}</td>
+                              <!--  <td>{{ annonce.idMembre }}</td>-->
+                                <td><a class="btn btn-info" href="{{ path('Affiche_Details_Annonce',{'idLogement':annonce.idLogement}) }}">Consulter</a></td>
+                                <td><a class="btn btn-danger btn-circle delete-btn" href data-toggle="modal" data-target="#myModal" id="{{ annonce.idLogement }}"> <i class="fa fa-times"></i> </a></td>
+
+
+                            </tr>
+
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Suppression</h4>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <p>Voulez vous vraiment supprimer cette annonce ?</p>
+                                            <p style="color: #ac2925">Cette action est irreversible!</p>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <a class="btn btn-outline btn-primary" href data-dismiss="modal">Annuler</a>
+                                            <a class="btn btn-outline btn-danger remove_item"  >Supprimer</a>
+                                        </div>
+                                        <input id="remove" hidden>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+
+
+    <script>
+        $(function() {
+
+            var searchField = $('#keyword');
+            var searchRegion = $('#cbRegion');
+            var annonceDiv = $('#resultat');
+            // var prixMin = jQuery( "#slider-range" ).slider( "values", 0 );
+            // var prixMax = jQuery( "#slider-range" ).slider( "values", 1 );
+            //  var values = jQuery( "#slider-range" ).slider( "option", "values" );
+
+            var delay = (function () {
+                var timer = 0;
+                return function (callback, ms) {
+                    clearTimeout(timer);
+                    timer = setTimeout(callback, ms);
+                };
+            })();
+
+            searchField.keyup(function (evt) {
+
+                var array = {'key': searchField.val(), 'key2': searchRegion.val()};
+
+                delay(function () {
+                    $.ajax({
+                        url: '{{ path('Recherche_Back_Annonce') }}',
+                        method: "POST",
+                        data: array,
+                        dataType: 'html',
+                        success: function (result) {
+                            var parsedData = result;
+                            annonceDiv.fadeOut(function () {
+                                annonceDiv.empty();
+                                annonceDiv.html(parsedData).fadeIn();
+                            });
+                        }
+                    });
+                }, 500);
+            });
+
+            searchRegion.change(function (evt) {
+
+                var array = {'key': searchField.val(), 'key2': searchRegion.val()};
+                $.ajax({
+                    url: '{{ path('Recherche_Back_Annonce') }}',
+                    method: "POST",
+                    data: array,
+                    dataType: 'html',
+                    success: function (result) {
+                        var parsedData = result;
+                        annonceDiv.fadeOut(function () {
+                            annonceDiv.empty();
+                            annonceDiv.html(parsedData).fadeIn();
+                        });
+                    }
+                });
+            });
+
+            $(document).ready(function () {
+
+                $(".delete-btn").click(function (e) {
+                    var entityId = e.target.id;
+                    $(".delete-btn").addClass('toremove');
+                    $("#remove").val(entityId);
+                    console.log(entityId);
+                });
+                $(".remove_item").click(function () {
+
+                    var entityId = $("#remove").val();
+                    console.log(entityId);
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'html',
+                        url: Routing.generate('Supprimer_Annonce_Back', {'idLogement': entityId}),
+                        success: function (resultat) {
+                            $(".delete-btn").removeClass('toremove');
+                            // jQuery("#div").reload();
+                            //window.location.reload();
+
+                            jQuery('#myModal').modal('hide');
+                            jQuery("#resultat").fadeOut(function () {
+                                jQuery("#resultat").empty();
+                            });
+                            jQuery("#resultat").fadeIn(function () {
+                                jQuery("#resultat").html(resultat).fadeIn();
+                            });
+
+                        }
+                    });
+
+                });
+
+
+            });
+        });
+    </script>
+{% endblock %}

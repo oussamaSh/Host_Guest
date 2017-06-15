@@ -1,0 +1,16 @@
+{% extends "::master_front.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+  <div class="visible-sm-block" style="text-align: center; margin-top: 10%">
+
+    <h2 class="title">Félicitations ! Votre nouveau compte a été créé avec succès ! </h2>
+      <p>Nous sommes heureux de vous accueillir sur Host&Guest.tn ! Nous vous remercions de votre confiance.</p>
+      <p>Vous pouvez maintenant utiliser les services réservés à nos clients </p>
+    <div class="clearfix"></div>
+  </div>
+    {% if targetUrl %}
+    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+    {% endif %}
+{% endblock fos_user_content %}

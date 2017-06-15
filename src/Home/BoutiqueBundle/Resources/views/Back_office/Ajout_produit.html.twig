@@ -1,0 +1,97 @@
+{% extends '::master_back.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Page ajout produit</h1>
+    <div>
+        <form  method="post" enctype="multipart/form-data">
+            {{ form_start(form)}}
+
+            {{ form_end(form) }}
+        </form>
+
+    </div>
+    <script>
+        $(function () {
+
+            $(".titre_error").hide();
+            $(".description_error").hide();
+            $(".tirage_error").hide();
+
+            var error_titre =false;
+            var error_description =false;
+            var error_tirage =false;
+
+            $(".form_titre").focusout(function () {
+                check_titre();
+            });
+
+            $(".form_description").focusout(function () {
+                check_description();
+            });
+            $(".form_tirage").select(function () {
+                check_tirage();
+            });
+
+            function check_titre() {
+                var titre_length = $(".form_titre").val().length;
+
+                if(titre_length < 8 ) {
+                    $("#titre_error").html("minumum 8 lettres ! ");
+                    $("#titre_error").show();
+                    error_titre = true;
+                }
+                else {
+                    $("#titre_error").hide();
+                }
+            }
+
+            function check_description() {
+                var description_length = $(".form_description").val().length;
+
+                if(description_length < 20 ) {
+                    $("#description_error").html("minumum 20 lettres ! ");
+                    $("#description_error").show();
+                    error_description = true;
+                }
+                else {
+                    $("#description_error").hide();
+                }
+            }
+
+
+            function check_tirage() {
+                var date_tirage = $(".form_tirage").val().getDate();
+                console.log(date_tirage);
+                var current_date = new Date();
+                if(Date.parse(date_tirage)  < Date.parse(current_date) ) {
+                    $("#tirage_error").html("erreur date");
+                    $("#tirage_error").show();
+                    error_tirage = true;
+                }
+                else {
+                    $("#tirage_error").hide();
+                }
+            }
+            $("#ajout_tombola_form").submit(function () {
+                error_titre =false;
+                error_description =false;
+                error_tirage =false;
+
+
+                check_titre();
+                check_description();
+                check_tirage();
+                if(error_titre == false && error_description == false && error_tirage==false){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            });
+
+        });
+    </script>
+
+{% endblock %}

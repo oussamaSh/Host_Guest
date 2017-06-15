@@ -1,0 +1,33 @@
+user_index:
+    path:     /
+    defaults: { _controller: "HomeUserBundle:User:index" }
+    methods:  GET
+
+user_show:
+    path:     /{id}/show
+    defaults: { _controller: "HomeUserBundle:User:show" }
+    methods:  GET
+
+user_new:
+    path:     /new
+    defaults: { _controller: "HomeUserBundle:User:new" }
+    methods:  [GET, POST]
+
+user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "HomeUserBundle:User:edit" }
+    methods:  [GET, POST]
+
+user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "HomeUserBundle:User:delete" }
+    methods:  DELETE
+
+admin_home:
+    path:     /admin_home
+    defaults: { _controller: "HomeUserBundle:Default:admin" }
+
+client_home:
+    path:     /client_home
+    defaults: { _controller: "HomeUserBundle:Default:client" }
+

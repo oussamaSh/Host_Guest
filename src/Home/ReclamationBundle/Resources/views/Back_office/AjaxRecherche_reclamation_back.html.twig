@@ -1,0 +1,50 @@
+
+                    <table class="table table-hover" id="result">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Date</th>
+                            <th>Sujet</th>
+                            <th>Etat</th>
+                            <th>Nom </th>
+                            <th>Prenom </th>
+                            <th>Cloturer</th>
+                            <th>Afficher</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for reclamation in reclamations %}
+                            <tr>
+                                <td>{{ reclamation.idReclamation }}</td>
+                                <td>{{ reclamation.dateReclamation|date("Y-m-d") }}</td>
+                                <td>{{ reclamation.sujetReclamation }}</td>
+                                <td>{{ reclamation.etat }}</td>
+                                <td>{{ reclamation.idMembre.nom }}</td>
+                                <td>{{ reclamation.idMembre.prenom }}</td>
+
+                                {% if(reclamation.etat!="Cloture") %}
+                                    <td><form  action="{{ path('Cloturer_reclamation_route',{idReclamation:reclamation.idReclamation}) }}" method="POST">
+                                            <button type="submit" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i>
+                                            </button> </form></td>
+                                {% else %}
+                                    <td><form  action="{{ path('Cloturer_reclamation_route',{idReclamation:reclamation.idReclamation}) }}" method="POST">
+                                            <button type="submit" class="btn btn-warning btn-circle" disabled><i class="fa fa-edit"></i>
+                                            </button> </form></td>
+                                {% endif %}
+
+                                <td> <form name="Form" action="{{ path('Affichermessageback_route',{idReclamation:reclamation.idReclamation}) }}" method="POST">
+                                        <button type="submit"  class="btn btn-primary btn-circle"> <i class="fa fa-list"></i>
+                                        </button>
+                                    </form>
+                                </td>
+
+                                <td> <form action="{{ path('Supprimer_reclamation_route',{idReclamation:reclamation.idReclamation}) }}" method="POST" onclick="return(confirm('Etes-vous sur de vouloir supprimer cette ligne?'))">
+                                        <button type="submit"  class="btn btn-danger btn-circle"> <i class="fa fa-times"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>

@@ -1,0 +1,383 @@
+{% extends '::master_front.html.twig' %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('oussama/oussama.css') }}">
+
+    <section id="content">
+        <div class="container">
+            <div id="main">
+
+                <div class="row">
+                    <div class="col-sm-4 col-md-3">
+                        <div class="travelo-google-map block" style="height: 750px;"></div>
+                    </div>
+                    <div class="form-group col-lg-4 col-lg-offset-3" >
+                        <input type="text" class="form-control" id="keyword" placeholder="Rechercher">
+                    </div>
+
+
+                    <div class="col-sm-8 col-md-9">
+                        <div class="sort-by-section clearfix">
+                            <h4 class="sort-by-title block-sm">Rechercher avec:</h4>
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label>Region</label>
+                                    <div class="selector" >
+                                        <select class="full-width" id="cbRegion" >
+                                            <option value="" selected>Tous</option>
+                                            <option value="Sousse">Sousse</option>
+                                            <option value="Ariana">Ariana</option>
+                                            <option value="Sfax">Sfax</option>
+                                            <option value="Bizerte">Bizerte</option>
+                                            <option value="Nabeul">Nabeul</option>
+                                            <option value="Kef">Kef</option>
+                                            <option value="Beja">Beja</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>Type du logement</label>
+                                    <div class="selector">
+                                        <select class="full-width" id="cbTypeLogement">
+                                            <option value="" selected>Tous</option>
+                                            <option value="Maison">Maison</option>
+                                            <option value="Appartement">Appartement</option>
+                                            <option value="Studio">Studio</option>
+                                        </select>
+                                       <!-- <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <span class="selection">Type</span><span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href><span class="glyphicon glyphicon-home"></span> Maison</a></li>
+                                                <li><a href><span class="glyphicon glyphicon-home"></span> Appartement</a></li>
+                                                <li><a href><span class="glyphicon glyphicon-home"></span> Studio</a></li>
+                                            </ul>
+                                        </div>-->
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label style="white-space: nowrap">Chambres disponible</label>
+                                    <div class="selector">
+                                        <select class="full-width" id="cbNbrChambre">
+                                            <option value="" selected>Veuillez choi..</option>
+                                            <option value="1">01</option>
+                                            <option value="2">02</option>
+                                            <option value="3">03</option>
+                                            <option value="4">04</option>
+                                            <option value="5">05</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <ul class="swap-tiles clearfix block-sm">
+                                    <li class="swap-list">
+                                        <a href="hotel-list-view.html"><i class="soap-icon-list"></i></a>
+                                    </li>
+                                    <li class="swap-grid active">
+                                        <a href="hotel-grid-view.html"><i class="soap-icon-grid"></i></a>
+                                    </li>
+                                    <li class="swap-block">
+                                        <a href="hotel-block-view.html"><i class="soap-icon-block"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                          <!--  <ul class="sort-bar clearfix block-sm">
+                                <li class="sort-by-name"><a class="sort-by-container" href="#"><span>name</span></a></li>
+                                <li class="sort-by-price"><a class="sort-by-container" href="#"><span>price</span></a></li>
+                                <li class="clearer visible-sms"></li>
+                                <li class="sort-by-rating active"><a class="sort-by-container" href="#"><span>rating</span></a></li>
+                                <li class="sort-by-popularity"><a class="sort-by-container" href="#"><span>popularity</span></a></li>
+                            </ul>-->
+
+                            <p>
+                                <label for="amount">Prix entre:</label>
+                                <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                            <input type="text" id="prixM" hidden>
+                                <input type="text" id="" hidden>
+                            </p>
+                            <div class="row form-group">
+                                <div class="col-md-9 ">
+                            <div id="slider-range"></div>
+                                </div>
+                                <div class="col-md-3 ">
+                                    <button type="button" class="button btn-medium" id="btn_searchPrix">Appliquer</button>
+                                </div>
+                                <input id="minValue" type="number" value="" hidden>
+                                <input id="maxValue" type="number" value="" hidden>
+                            </div>
+
+                        </div>
+
+                        <div class="hotel-list" id="result">
+                            <div class="row image-box hotel listing-style1"  >
+                             {% for annonce in annonces %}
+
+                                        <div class="col-sm-6 col-md-4">
+                                        <article class="box">
+                                            {% for image in annonce.pictures %}
+                                            {% if loop.first %}
+                                            <figure>
+                                                <a href="{{path('Slideshow_popup',{'idLogement':annonce.idLogement}) }}" class="hover-effect popup-gallery"><img width="270" height="160" alt="" src="{{ asset('uploads/' ~ image.path) }}" ></a>
+                                            </figure>
+                                            {% endif %}
+                                            {% endfor %}
+                                            <div class="details">
+                                                <span class="price">
+                                                    {{ annonce.prixLogement }} DT
+                                                    <small>/Nuit</small>
+                                                </span>
+                                                <h4 class="box-title" style="white-space:nowrap;">{{ annonce.titreAnnonce[0:20] }}{% if annonce.titreAnnonce|length > 20 %}...{% endif %}<small>{{ annonce.region }} {{ annonce.paysLogement }}</small></h4>
+                                                <div class="feedback">
+                                                    <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="4 stars"><span style="width: 80%;" class="five-stars"></span></div>
+                                                    <span class="review">270 reviews</span>
+                                                </div>
+                                                <p class="description">{{ annonce.descriptionLogement[0:50] }}{% if annonce.descriptionLogement|length > 50 %}...{% endif %}</p>
+                                                <div class="action">
+                                                    <a class="button btn-small" href="{{ path('Affiche_Details_Annonce',{'idLogement':annonce.idLogement}) }}">CONSULTER</a>
+                                                    <a class="button btn-small yellow popup-map" href="#" data-box="{{ annonce.latlogement }}, {{ annonce.longlogement }}">VOIR EN MAP</a>
+                                                </div>
+                                            </div>
+                                        </article>
+
+                                    </div>
+                                 <script type="text/javascript">
+                                     var uluru = {lat: {{ annonce.latlogement }}, lng: {{ annonce.longlogement }}};
+                                     tjq(".travelo-google-map").gmap3({
+                                         map: {
+                                             options: {
+                                                 center: [36.898392, 10.189732],
+                                                 zoom: 12
+                                             }
+                                         },
+
+                                         marker:{
+                                             values: [
+                                                 {latLng:[{{ annonce.latlogement }}, {{ annonce.longlogement }}], data:"Host&Guest"}
+
+                                             ],
+                                             options: {
+                                                 draggable: false
+
+                                             },
+
+                                         }
+
+                                     })
+                                         .marker({
+                                             position: uluru
+                                         })
+                                         .infowindow({
+                                             content: "Hello from Uluru"
+                                         })
+                                         .then(function (infowindow) {
+                                             var map = this.get(0);
+                                             var marker = this.get(1);
+                                             marker.addListener('click', function() {
+                                                 infowindow.open(map, marker);
+                                             });
+                                         });
+
+
+                                 </script>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {# display navigation #}
+    <div class="container col-md-offset-6">
+        <div class="row">
+             <div class="center-block">
+                 <div class="pagination">
+                    {{ knp_pagination_render(annonces) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(function(){
+
+            jQuery( "#slider-range" ).slider({
+                range: true,
+                min: 0,
+                max: 1000,
+                values: [ 75, 300 ],
+                slide: function( event, ui ) {
+                    $( "#amount" ).val( ui.values[ 0 ] + " DT -" + ui.values[ 1 ] + "  DT"   );
+                    $( "#minValue" ).val( ui.values[ 0 ] );
+                    $( "#maxValue" ).val( ui.values[ 1 ] );
+
+                }
+            });
+            jQuery( "#amount" ).val( "$" + jQuery( "#slider-range" ).slider( "values", 0 ) +
+                " - $" + jQuery( "#slider-range" ).slider( "values", 1 ) );
+
+            var searchField = $('#keyword');
+            var searchRegion = $('#cbRegion');
+            var searchNbrChambre = $('#cbNbrChambre');
+            var searchTypeLogement = $('#cbTypeLogement');
+            var btn_searchPrix = $('#btn_searchPrix');
+            var annonceDiv = $('#result');
+            // var prixMin = jQuery( "#slider-range" ).slider( "values", 0 );
+            // var prixMax = jQuery( "#slider-range" ).slider( "values", 1 );
+            //  var values = jQuery( "#slider-range" ).slider( "option", "values" );
+
+            var delay = (function(){
+                var timer = 0;
+                return function(callback, ms){
+                    clearTimeout (timer);
+                    timer = setTimeout(callback, ms);
+                };
+            })();
+
+           /* $('#loadmore').click(function(evt){
+                $.ajax({
+                    url: '{ path('loadMoreDiv') }}',
+                    type: "POST",
+                    success: function(data) {
+                        $('#loadmoreDiv').append(data);
+                    }
+                });
+            });*/
+
+        /*    console.log(jQuery("ul li").size());
+            size_li = $("ul li").size();
+            x=3;
+            $('ul li:lt('+x+')').show();
+            $('#loadMore').click(function () {
+                x= (x+5 <= size_li) ? x+5 : size_li;
+                $('ul li:lt('+x+')').show();
+
+                });*/
+
+            searchField.keyup(function(evt){
+
+                var array = {'key' : searchField.val(),'key2':searchRegion.val(),'key3':searchNbrChambre.val(),
+                    'key4':searchTypeLogement.val(),'key5':jQuery( "#slider-range" ).slider( "values", 0 ),'key6':jQuery( "#slider-range" ).slider( "values", 1 )};
+
+                delay(function(){
+                    $.ajax({
+                    url: '{{ path('ajax_search') }}',
+                    method: "POST",
+                    data: array,
+                    dataType: 'html',
+                    success: function(result) {
+                        var parsedData =result;
+                        annonceDiv.fadeOut(function() {
+                            annonceDiv.empty();
+                            annonceDiv.html(parsedData).fadeIn();
+                        });
+                    }
+                });
+                }, 500 );
+            });
+
+           searchRegion.change(function(evt){
+
+               var array = {'key' : searchField.val(),'key2':searchRegion.val(),'key3':searchNbrChambre.val(),
+                   'key4':searchTypeLogement.val(),'key5':jQuery( "#slider-range" ).slider( "values", 0 ),'key6':jQuery( "#slider-range" ).slider( "values", 1 )};
+               $.ajax({
+                    url: '{{ path('ajax_search') }}',
+                    method: "POST",
+                    data: array ,
+                    dataType: 'html',
+                    success: function(result) {
+                        var parsedData =result;
+                        annonceDiv.fadeOut(function() {
+                            annonceDiv.empty();
+                            annonceDiv.html(parsedData).fadeIn();
+                        });
+                    }
+                });
+            });
+
+            searchNbrChambre.change(function(evt){
+
+                var array = {'key' : searchField.val(),'key2':searchRegion.val(),'key3':searchNbrChambre.val(),
+                    'key4':searchTypeLogement.val(),'key5':jQuery( "#slider-range" ).slider( "values", 0 ),'key6':jQuery( "#slider-range" ).slider( "values", 1 )};
+                $.ajax({
+                    url: '{{ path('ajax_search') }}',
+                    method: "POST",
+                    data: array ,
+                    dataType: 'html',
+                    success: function(result) {
+                        var parsedData =result;
+                        annonceDiv.fadeOut(function() {
+                            annonceDiv.empty();
+                            annonceDiv.html(parsedData).fadeIn();
+                        });
+                    }
+                });
+            });
+
+            searchTypeLogement.change(function(evt){
+
+                var array = {'key' : searchField.val(),'key2':searchRegion.val(),'key3':searchNbrChambre.val(),
+                    'key4':searchTypeLogement.val(),'key5':jQuery( "#slider-range" ).slider( "values", 0 ),'key6':jQuery( "#slider-range" ).slider( "values", 1 )};
+                $.ajax({
+                    url: '{{ path('ajax_search') }}',
+                    method: "POST",
+                    data: array ,
+                    dataType: 'html',
+                    success: function(result) {
+                        var parsedData =result;
+                        annonceDiv.fadeOut(function() {
+                            annonceDiv.empty();
+                            annonceDiv.html(parsedData).fadeIn();
+                        });
+                    }
+                });
+            });
+
+
+            $('#btn_searchPrix').click(function(evt){
+
+
+              //  console.log(jQuery( "#slider-range" ).slider( "values", 0 ));
+                //console.log(jQuery( "#slider-range" ).slider( "values", 1 ));
+                console.log(jQuery( "#minValue" ).val());
+                console.log(jQuery( "#maxValue" ).val());
+                var array = {'key' : searchField.val(),'key2':searchRegion.val(),'key3':searchNbrChambre.val(),
+                    'key4':searchTypeLogement.val(),'key5': jQuery( "#minValue" ).val(),'key6':jQuery( "#maxValue" ).val()};
+console.log(array);
+
+                    $.ajax({
+                        url: '{{ path('ajax_search') }}',
+                        method: "POST",
+                        data: array,
+                        dataType: 'html',
+                        success: function(result) {
+                            var parsedData =result;
+                            console.log('wa333333333');
+                            annonceDiv.fadeOut(function() {
+                                annonceDiv.empty();
+                                annonceDiv.html(parsedData).fadeIn();
+                            });
+                        }
+                    });
+
+            });
+
+        });
+
+     /*   $(".dropdown-menu li a").click(function(){
+
+            $(this).parents(".btn-group").find('.selection').text($(this).text());
+            $(this).parents(".btn-group").find('.selection').val($(this).text());
+
+        });*/
+
+    </script>
+
+
+{% endblock %}

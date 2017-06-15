@@ -1,0 +1,55 @@
+{% extends '::master_front.html.twig' %}
+
+{% block body %}
+
+
+
+
+    <section id="content" class="gray-area">
+        <div class="container">
+            <div class="row">
+                <div id="main" class="col-sm-8 col-md-9">
+                    <div class="booking-information travelo-box">
+                        <h2>Facture  N°: {{ reservation.paymentInstruction.id }}</h2>
+                        <h6>Client:{{ reservation.idMembre.nom }}  {{ reservation.idMembre.prenom }}</h6>
+                        <a href="{{ path('PDF_facture' ,{idReservation:reservation.idReservation})}}" class="button btn-small green">PDF</a>
+                        <hr>
+                        <h2>Information sur l'hote</h2>
+                        <dl class="term-description">
+                            <dt>NOM:</dt><dd>{{ reservation.idLogement.idMembre.nom }}</dd>
+                            <dt>PRENOM:</dt><dd>{{ reservation.idLogement.idMembre.prenom }}</dd>
+                            <dt>ADRESSE:</dt><dd>{{ reservation.idLogement.idMembre.adressePhysique }}</dd>
+                            <dt>E-mail:</dt><dd>{{ reservation.idLogement.idMembre.email }}</dd>
+                            <dt>NUMERO DE TELEPHONE:</dt><dd>{{ reservation.idLogement.idMembre.numTel }}</dd>
+
+                        </dl>
+                        <hr>
+                        <h2>Information sur la reservation</h2>
+                        <dl class="term-description">
+                            <dt>RESERVATION N°:</dt><dd>{{ reservation.idReservation}}</dd>
+                            <dt>DATE DEBUT:</dt><dd>{{ reservation.dateDebut|date('d/m/Y')}}</dd>
+                            <dt>DATE FIN:</dt><dd>{{ reservation.dateFin|date('d/m/Y')}}</dd>
+                            <dt>PAYS:</dt><dd>{{ reservation.idLogement.paysLogement}}</dd>
+                            <dt>ADRESSE:</dt><dd>{{ reservation.idLogement.adresseLogement}}</dd>
+                             </dl>
+                        <hr>
+                        <h2>Information sur le paiement</h2>
+                        <dl class="term-description">
+                            <dt>PRIX:</dt><dd>{{ reservation.prixTot}} DT</dd>
+                            <dt>FAIT LE:</dt><dd>{{ reservation.paymentInstruction.createdAt|date }}</dd>
+                            <dt>PAR:</dt><dd>{{ reservation.paymentInstruction.paymentSystemName }}</dd>
+                         </dl>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+{% endblock %}

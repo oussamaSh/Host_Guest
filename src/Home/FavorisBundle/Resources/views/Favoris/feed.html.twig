@@ -1,0 +1,354 @@
+{% extends '::master_front.html.twig' %}
+{% block body %}
+    <script type="text/javascript" src="{{ asset('dist/js/jquery.js') }}"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="{{ asset('dist/js/FavorisJS/feed.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('dist/js/FavorisJS/Style.css') }}">
+    <script src="{{ asset('dist/js/FavorisJS/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('dist/js/FavorisJS/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+{{ app.user.id }}
+       <section id="content">
+           <div id="dialog-confirm-delete" title="Delete this status ?" style="display:none  ;">
+               <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
+           </div>
+           <div id="dialog-confirm-report" title="Report this status ?" style="display:none  ;">
+               <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
+           </div>
+        <div class="container">
+            <div class="row">
+                <div class="sidebar col-sm-4 col-md-3">
+                    <div class="travelo-box">
+                        <h5 class="box-title">Search Stories</h5>
+                        <div class="with-icon full-width">
+                            <input type="text" class="input-text full-width" placeholder="story name or category">
+                            <button class="icon green-bg white-color"><i class="soap-icon-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="travelo-box">
+                        <h5 class="box-title">About Travelo</h5>
+                        <p>Phasellus vehicula justo eget  sollicitudin eu tincidu ncurabitur ele sollicitu tincidu nulla curabitur magna ined and posuere lorem sollicitudin eu tin.</p>
+                    </div>
+                    <div class="tab-container box">
+                        <ul class="tabs full-width">
+                            <li><a data-toggle="tab" href="#recent-posts">Recent</a></li>
+                            <li class="active"><a data-toggle="tab" href="#popular-posts">Popular</a></li>
+                            <li><a data-toggle="tab" href="#new-posts">New</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="recent-posts" class="tab-pane fade">
+
+                            </div>
+                            <div id="popular-posts" class="tab-pane fade in active">
+                                <div class="image-box style14">
+                                    <article class="box">
+                                        <figure><a href="#" title=""><img width="63" height="59" src="" alt=""></a></figure>
+                                        <div class="details">
+                                            <h5 class="box-title"><a href="#">Half-Day Island Tour</a></h5>
+                                            <label class="price-wrapper"><span class="price-per-unit">$35</span>Family Package</label>
+                                        </div>
+                                    </article>
+                                    <article class="box">
+                                        <figure><a href="#" title=""><img width="63" height="59" src="" alt=""></a></figure>
+                                        <div class="details">
+                                            <h5 class="box-title"><a href="#">Ocean Park Tour</a></h5>
+                                            <label class="price-wrapper"><span class="price-per-unit">$26</span>Per Person</label>
+                                        </div>
+                                    </article>
+                                    <article class="box">
+                                        <figure><a href="#" title=""><img width="63" height="59" src="" alt=""></a></figure>
+                                        <div class="details">
+                                            <h5 class="box-title"><a href="#">Dream World Trip</a></h5>
+                                            <label class="price-wrapper"><span class="price-per-unit">$11</span>holiday offer</label>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                            <div id="new-posts" class="tab-pane fade">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="travelo-box filters-container">
+                        <h4 class="box-title">All Categories</h4>
+                        <ul class="check-square categories-filter filters-option">
+                            <li><a href="#">All<small>(722)</small></a></li>
+                            <li><a href="#">Family<small>(982)</small></a></li>
+                            <li><a href="#">Romance<small>(127)</small></a></li>
+                            <li class="active"><a href="#">Adventure<small>(222)</small></a></li>
+                            <li class="active"><a href="#">Beach<small>(158)</small></a></li>
+                            <li><a href="#">Wildlife<small>(439)</small></a></li>
+                            <li><a href="#">Island &amp; parks<small>(52)</small></a></li>
+                        </ul>
+                        <a class="button btn-mini">MORE</a>
+                    </div>
+                    <div class="travelo-box twitter-box">
+                        <h4 class="box-title">Twitter Feeds</h4>
+                        <div class="twitter-holder">
+                            <ul>
+                                <li class="tweet">
+                                    <p class="tweet-text">
+                                        <a href="#">@Travelo</a>, Proin feugiat mattis a sed adipiscing velit sodales.
+                                    </p>
+                                    <a class="tweet-date" href="http://twitter.com/">25 Minutes ago</a>
+                                </li>
+                                <li class="tweet">
+                                    <p class="tweet-text">
+                                        Proin feugiat mattis antesmoke sed adipiscing velit sodales.
+                                        <a href="#">http://travelo.com</a>
+                                    </p>
+                                    <a class="tweet-date" href="http://twitter.com/">25 Minutes ago</a>
+                                </li>
+                                <li class="tweet">
+                                    <p class="tweet-text">
+                                        <a href="#">@Travelo</a>, Proin feugiat mattis a sed adipiscing velit sodales.
+                                    </p>
+                                    <a class="tweet-date" href="http://twitter.com/">25 Minutes ago</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="travelo-box contact-box">
+                        <h4 class="box-title">Need Travelo Help?</h4>
+                        <p>We would be more than happy to help you. Our team advisor are 24/7 at your service to help you.</p>
+                        <address class="contact-details">
+                            <span class="contact-phone"><i class="soap-icon-phone"></i> 1-800-123-HELLO</span>
+                            <br>
+                            <a href="#" class="contact-email">help@travelo.com</a>
+                        </address>
+                    </div>
+                </div>
+                <div id="main" class="col-sm-8 col-md-9" style="width: 50%;height:100%;">
+
+                    <div class="tab-container style1">
+                        <form id="add_status" enctype="multipart/form-data">
+                        <ul class="tabs full-width">
+                            <li class="active"><a href="#unlimited-layouts" data-toggle="tab" aria-expanded="true">Write a status</a></li>
+                            <li class="active">
+                                <form id="fileform">
+                                    <span class="file-wrapper"><input id="fileupload" type="file" name="files" />
+                                    <span class="button">Choose a Photo</span></span>
+                                </form>
+                            </li>
+
+
+
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="unlimited-layouts">
+                                <textarea name="status" rows="6" class="input-text full-width add_status" placeholder="write message here"></textarea>
+                                <a href="#" class="button pull-right">Add</a>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                    <div class="page">
+                        <span style="display: none;" class="entry-title page-title">Blog Left Sidebar</span>
+                        <span style="display: none;" class="vcard"><span class="fn"><a rel="author" title="Posts by admin" href="#">admin</a></span></span>
+                        <span style="display:none;" class="updated">2014-06-20T13:35:34+00:00</span>
+                        <div class="post-content">
+
+                            <div class="blog-infinite">
+
+                                {% for status in feeds %}
+                                    {{ status.user.id }}
+                                {% if status.user not in app.user.followings %}
+                                <div class="post without-featured-item" id="id{{ status.id }}">
+
+                                    <div class="post-content-wrapper">
+                                        <div class="details">
+                                            <h2 class="entry-title">
+                                                    <div class="entry-author fn">
+                                                       <i class="soap-icon-chevron-down pull-right"></i><div class="action pull-right">
+
+                                                            {%  if 1 == app.user.id %}
+                                                            <a class="delete" id="{{ status.id }}">Supprimer</a>
+                                                            {% else %}
+                                                            <a href="#" class="report" id="{{ status.id }}">Signaler</a>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="avatar">
+
+                                                            <img src="{{ asset('Uploads/Images/') }}{{ status.getUser().getAvatar() }}" width="20" height="20" alt=""><a href="{{ path('AfficherProfileUser',{'id':status.getUser().id}) }}" class="author" style="font-weight: 400;">{{ status.user.nom }}  {{ status.user.prenom }}</a>
+
+                                                        </div>
+
+                                                    </div></h2>
+                                            <div class="excerpt-container">
+                                                <p>{{ status.contenu }}</p>
+                                            </div>
+                                            <div class="post-meta">
+                                                <div class="entry-date">
+                                                    <label class="date">{{ status.dateAjout.format('d') }}</label>
+                                                    <label class="month">{{ status.dateAjout.format('M') }}</label>
+                                                </div>
+
+                                                <div class="entry-action" >
+                                                    <a  class="button entry-comment btn-small comm_visibility" id="{{ status.id }}"><i class="soap-icon-comment" id="{{ status.id }}"></i>
+                                                        {{ status.comments.count }} Commentaire(s)</a>
+                                                    <a  class="button btn-small like_btn
+                                                    {% for like in status.likes %}
+                                                    {% if like.user == app.user %}
+                                                    liked " style="background: #01b7f2;color:#fff;
+                                                    {% endif %}
+                                                    {% endfor %}"
+                                                        id="{{ status.id }}"
+                                                    >
+                                                        <input class="nb_likes " value="{{ status.likes.count }}" hidden> <i class="soap-icon-wishlist {% for like in status.likes %}
+                                                    {% if like.user == app.user %}
+                                                    white-color
+                                                        {% endif %}
+                                                    {% endfor %}" id="{{ status.id }}"></i>
+                                                        <span id="{{ status.id }}">{{ status.likes.count }} Like(s)</span></a>
+                                                    <span class="entry-tags"><i class="soap-icon-features"></i><span style="width: 20px;height: 20px;">{# socialLink('facebook') #}
+                                                        </span></span>
+                                                </div>
+
+                                            </div>
+                                            <div class="comments-container block" style="display: none;">
+
+                                                <ul class="comment-list travelo-box">
+                                                    {% for comment in status.comments %}
+                                                    <li class="comment depth-1" >
+                                                        <div class="the-comment" style="height: 10%;">
+                                                            <div class="avatar">
+                                                                <img src="{{ asset('Uploads/Images/') }}{{ comment.getUser().getAvatar() }}" width="20" height="20" alt="">
+                                                            </div>
+                                                            <div class="comment-box">
+                                                                <div class="comment-author">
+                                                                    <a href="#" class="button btn-mini pull-right">REPLY</a>
+                                                                    <h4 class="box-title"><a href="#">{{ comment.getUser().getNom() }}</a><small>{{ comment.getDateAjoutString() }}</small></h4>
+                                                                </div>
+                                                                <div class="comment-text">
+                                                                    <p> {{ comment.contenu}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                            <input class="input-text full-width add_comment" type="text" class="add_comment" id="{{ status.id }}" placeholder="Votre commentaire ici...">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <a href="#" class="button btn-large full-width">LOAD MORE POSTS</a>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar col-sm-4 col-md-3">
+                    <div class="travelo-box">
+                        <h5 class="box-title">Search Stories</h5>
+                        <div class="with-icon full-width">
+                            <input type="text" class="input-text full-width" placeholder="story name or category">
+                            <button class="icon green-bg white-color"><i class="soap-icon-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="travelo-box">
+                        <h5 class="box-title">About Travelo</h5>
+                        <p>Phasellus vehicula justo eget  sollicitudin eu tincidu ncurabitur ele sollicitu tincidu nulla curabitur magna ined and posuere lorem sollicitudin eu tin.</p>
+                    </div>
+
+
+
+                    <div class="travelo-box filters-container">
+                        <div class="container" style="width: 270%;">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" id="accordion">
+                                            <span class="glyphicon glyphicon-comment"></span> Chat
+                                            <div class="btn-group pull-right">
+                                                <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="collapseOne">
+                                            <div class="panel-body">
+                                                <ul class="chat">
+                                                    {% for message in messages %}
+                                                    <li class="left clearfix"><span class="chat-img pull-left">
+                            <img src="{{ asset('Uploads/Images/') }}{{ message.getUser().getAvatar() }}" alt="User Avatar" class="img-circle" style="height: 40px;width: 40px;" />
+                        </span>
+                                                        <div class="chat-body clearfix">
+                                                            <div class="header">
+                                                                <strong class="primary-font">{{ message.user.nom }} </strong> <small class="pull-right text-muted">
+                                                                    <span class="glyphicon glyphicon-time"></span>{{  message.DateAjoutString() }}</small>
+                                                            </div>
+                                                            <p>
+                                                                {{  message.contenu }}
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                {% endfor %}
+                                            </div>
+                                            <div class="panel-footer">
+                                                <div class="input-group">
+                                                    <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                                                    <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat">
+                                Send</button>
+                        </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="travelo-box twitter-box">
+                        <h4 class="box-title">Twitter Feeds</h4>
+                        <div class="twitter-holder">
+                            <ul>
+                                <li class="tweet">
+                                    <p class="tweet-text">
+                                        <a href="#">@Travelo</a>, Proin feugiat mattis a sed adipiscing velit sodales.
+                                    </p>
+                                    <a class="tweet-date" href="http://twitter.com/">25 Minutes ago</a>
+                                </li>
+                                <li class="tweet">
+                                    <p class="tweet-text">
+                                        Proin feugiat mattis antesmoke sed adipiscing velit sodales.
+                                        <a href="#">http://travelo.com</a>
+                                    </p>
+                                    <a class="tweet-date" href="http://twitter.com/">25 Minutes ago</a>
+                                </li>
+                                <li class="tweet">
+                                    <p class="tweet-text">
+                                        <a href="#">@Travelo</a>, Proin feugiat mattis a sed adipiscing velit sodales.
+                                    </p>
+                                    <a class="tweet-date" href="http://twitter.com/">25 Minutes ago</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="travelo-box contact-box">
+                        <h4 class="box-title">Need Travelo Help?</h4>
+                        <p>We would be more than happy to help you. Our team advisor are 24/7 at your service to help you.</p>
+                        <address class="contact-details">
+                            <span class="contact-phone"><i class="soap-icon-phone"></i> 1-800-123-HELLO</span>
+                            <br>
+                            <a href="#" class="contact-email">help@travelo.com</a>
+                        </address>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

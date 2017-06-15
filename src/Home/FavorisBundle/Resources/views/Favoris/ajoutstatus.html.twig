@@ -1,0 +1,75 @@
+<div class="post without-featured-item" id="id{{ status.id }}">
+
+    <div class="post-content-wrapper">
+        <div class="details">
+            <h2 class="entry-title">
+                <div class="entry-author fn">
+                    <i class="soap-icon-chevron-down pull-right"></i><div class="action pull-right">
+                        {%  if status.getUser().id == app.user.id %}
+                            <a class="delete" id="{{ status.id }}">Supprimer</a>
+                        {% else %}
+                            <a href="#" class="report" id="{{ status.id }}">Signaler</a>
+                        {% endif %}
+                    </div>
+                    <div class="avatar">
+                        <img src="{{ asset('Uploads/Images/') }}{{ status.getUser().getAvatar() }}" width="20" height="20" alt=""><a href="{{ path('AfficherProfileUser',{'id':status.getUser().id}) }}" class="author" style="font-weight: 400;">{{ status.user.nom }}  {{ status.user.prenom }}</a>
+                    </div>
+
+                </div></h2>
+            <div class="excerpt-container">
+                <p>{{ status.contenu }}</p>
+            </div>
+            <div class="post-meta">
+                <div class="entry-date">
+                    <label class="date">{{ status.dateAjout.format('d') }}</label>
+                    <label class="month">{{ status.dateAjout.format('M') }}</label>
+                </div>
+
+                <div class="entry-action" >
+                    <a  class="button entry-comment btn-small comm_visibility" id="{{ status.id }}"><i class="soap-icon-comment" id="{{ status.id }}"></i>
+                        {{ status.comments.count }} Commentaire(s)</a>
+                    <a  class="button btn-small like_btn
+                                                    {% for like in status.likes %}
+                                                    {% if like.user == app.user %}
+                                                    liked " style="background: #01b7f2;color:#fff;
+                    {% endif %}
+                                                    {% endfor %}"
+                        id="{{ status.id }}"
+                    >
+                        <input class="nb_likes " value="{{ status.likes.count }}" hidden> <i class="soap-icon-wishlist {% for like in status.likes %}
+                                                    {% if like.user == app.user %}
+                                                    white-color
+                                                        {% endif %}
+                                                    {% endfor %}" id="{{ status.id }}"></i>
+                        <span id="{{ status.id }}">{{ status.likes.count }} Like(s)</span></a>
+
+                </div>
+
+            </div>
+            <div class="comments-container block" style="display: none;">
+
+                <ul class="comment-list travelo-box">
+                    {% for comment in status.comments %}
+                        <li class="comment depth-1" >
+                            <div class="the-comment" style="height: 10%;">
+                                <div class="avatar">
+                                    <img src="{{ asset('Uploads/Images/') }}{{ comment.getUser().getAvatar() }}" width="20" height="20" alt="">
+                                </div>
+                                <div class="comment-box">
+                                    <div class="comment-author">
+                                        <a href="#" class="button btn-mini pull-right">REPLY</a>
+                                        <h4 class="box-title"><a href="#">{{ comment.getUser().getNom() }}</a><small>{{ comment.getDateAjoutString() }}</small></h4>
+                                    </div>
+                                    <div class="comment-text">
+                                        <p> {{ comment.contenu}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <input class="input-text full-width add_comment" type="text" class="add_comment" id="{{ status.id }}" placeholder="Votre commentaire ici...">
+        </div>
+    </div>
+</div>

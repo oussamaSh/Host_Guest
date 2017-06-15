@@ -1,0 +1,82 @@
+{%  extends '::master_back.html.twig' %}
+
+{% block body %}
+
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="icon-box style11">
+                        <div class="icon-wrapper">
+                            <i class="soap-icon-clock"></i>
+                        </div>
+
+                        <dl class="details">
+
+
+                            {% for livraison in livraison %}
+                                <dt class="skin-color">Details de la livraison</dt>
+                          <dd><label>id dde la livraison :</label>{{ livraison.idLivraison }}</dd>
+                            <dd><label>adresse de destination :</label>{{ livraison.adresseDestination }}</dd>
+                            <dd><label>Region :</label>{{ livraison.region  }}</dd>
+                            <dd><label>code Postal :</label>{{ livraison.codePostal }}</dd>
+                            <dd><label>Date de livraison :</label>{{ livraison.dateLivraison|date('Ymd')}}</dd>
+                                <dd><label>Etat de la livraison :</label>{{ livraison.etatLivraison }}</dd>
+
+                                <dd><label>id:</label>{{ livraison.idDateAchat.idDateAchat }}</dd>
+                            {% endfor %}
+
+                        </dl>
+                    </div>
+
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+
+
+
+
+
+            <div class="panel-heading" style="text-align:center">
+                Liste  des achats
+            </div>
+
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Date Achats</th>
+                            <th>Username</th>
+                            <th>Produit</th>
+                            <th>Quantite</th>
+                            <th>Prix total</th>
+                            <th>voir details livraison</th>
+
+                        </tr>
+                        </thead>
+
+                        {% for Achat in Achats %}
+                            <tr>
+                            <th>{{ Achat.idDateAchat }}</th>
+                        <th>{{ Achat.dateA|date('Ymd') }}</th>
+                        <th>{{ Achat.idMembre  }}</th>
+                        <th>{{ Achat.idProduit.nomProduit }}</th>
+                        <th>{{ Achat.quantiteProduit}}</th>
+                                <th>{{ Achat.prixTotal }}</th>
+                                <th> <a class="button btn-small" href="{{ path('Afficher_livraison',{'idDateAchat':Achat.idDateAchat})}} }}">Voir details livraison</a></th>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+
+
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+        </div>
+    </div>
+
+
+{%  endblock %}

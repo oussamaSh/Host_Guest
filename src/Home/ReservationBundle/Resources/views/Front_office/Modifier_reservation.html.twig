@@ -1,0 +1,43 @@
+{% extends '::master_front.html.twig' %}
+{% block body %}
+
+
+    <form action="{{ path('Modifier_Reservations',{idReservation:reservation.idReservation}) }}" method="post">
+        <div class="row">
+
+            <div class="form-group col-sm-6 col-md-4">
+                <h4 class="title"></h4>
+                <div class="row">
+                    <div class="col-md-5">
+                        <label>Arrivée</label>
+                        <div class="datepicker-wrap dark-blue">
+                            <input type="text" class="input-text full-width" placeholder="{{ reservation.dateDebut |date('d/m/Y')}} " name="dateDebut" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <label>Départ</label>
+                        <div class="datepicker-wrap dark-blue">
+                            <input type="text" class="input-text full-width" placeholder="{{ reservation.dateFin|date('d/m/Y')}}" name="dateFin" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-5">
+                    <label class="hidden-xs">&nbsp;</label>
+                    <input name="currency" val="EUR"  hidden>
+                    <button type="submit" class="button btn-medium dark-blue1"> MODIFIER</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+
+
+
+
+
+
+
+{% endblock %}

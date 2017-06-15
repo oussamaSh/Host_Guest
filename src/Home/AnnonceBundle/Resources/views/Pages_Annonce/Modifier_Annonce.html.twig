@@ -1,0 +1,217 @@
+{% extends '::master_front.html.twig' %}
+
+{% block body %}
+
+    <div style="height: 500px">
+        <div>
+            <img class="col-sm-12 col-md-12 " style="padding: 0" height="480px" src="{{ asset('template_front/images/banner.jpg') }}">
+        </div>
+        <div class="col-sm-8 col-md-9 col-sm-offset-1 style="height: 650px;" ">
+            <div class="travelo-box">
+                {{ form_start(form) }}
+                <div id="div1">
+                    <h2>Etape 1/5</h2>
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <label>Titre de votre annonce</label>
+                            {{ form_widget(form.titreAnnonce, {'attr': {'class': 'input-text full-width'}}) }}
+                        </div>
+                        <div class="col-xs-6">
+                            <label>Pays</label>
+                            {{ form_widget(form.paysLogement, {'attr': {'class': 'input-text full-width'}}) }}
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <label>Adresse</label>
+                            {{ form_widget(form.adresseLogement, {'attr': {'class': 'input-text full-width'}}) }}
+                        </div>
+                        <div class="col-xs-6">
+                            <label>Code Postal</label>
+                            {{ form_widget(form.codePostal, {'attr': {'class': 'input-text full-width'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        {{ form_widget(form.descriptionLogement, {'attr': {'class': 'input-text full-width','rows': '6','placeholder':'Veuillez décrire votre logement'}}) }}
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-6 col-xs-offset-6">
+                            <button type="button" id="suivant1" name="suivant1" formaction="" class="btn-large full-width">SUIVANT</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="div2" hidden>
+                    <h2>Etape 2/5</h2>
+                    <div class="row form-group">
+                        <div class="col-xs-4">
+                            <label>Nombre de chambres disponible</label>
+                            {{ form_widget(form.nbrChambre, {'attr': {'class': 'input-text full-width'}}) }}
+                        </div>
+                        <div class="col-xs-4">
+                            <label>Nombre de lits disponible</label>
+                            {{ form_widget(form.nbrLit, {'attr': {'class': 'input-text full-width'}}) }}
+                        </div>
+                        <div class="col-xs-4">
+                            <label>Nombre de salles de bains disponible</label>
+                            {{ form_widget(form.nbrSalledebain, {'attr': {'class': 'input-text full-width'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <label>Type du logement</label>
+                            {{ form_widget(form.typeLogement, {'attr': {'class': 'input-text full-width'}}) }}
+                        </div>
+                        <div class="col-xs-6">
+                            <label>Prix</label>
+                            {{ form_widget(form.prixLogement, {'attr': {'class': 'input-text full-width'}}) }}
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <button id="precedent1" type="button"  name="precedent1" class="btn-large full-width">PRECEDENT</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button id="suivant2" type="button" name="suivant2" class="btn-large full-width">SUIVANT</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="EquipementDiv" hidden>
+                    <h2>Etape 3/5</h2>
+                    <div class="row form-group">
+                        <div class="col-lg-4 col-xs-8 col-md-6">
+                            <div class="checkbox">
+                                <label><input type="checkbox" class="chbEq" name="chb_Ascenseur">Ascenseur</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" class="chbEq" name="chb_Gardien">Gardien</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" class="chbEq" name="chb_Internet">Internet</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-xs-8 col-md-6">
+                            <div class="checkbox">
+                                <label><input type="checkbox" class="chbEq" name="chb_Television">Television</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" class="chbEq" name="chb_secheLinge">Séche Linge</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" class="chbEq" name="chb_Interphone">Interphone</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-4 col-xs-8 col-md-6">
+                            <div class="checkbox">
+                                <label><input type="checkbox" class="chbEq" name="chb_SecheCheveux">Séche cheveux</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" class="chbEq" name="chb_MachineALaver">Machine à laver</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" class="chbEq" name="chb_Chauffage">Chauffage</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-xs-8 col-md-6">
+                            <div class="checkbox">
+                                <label><input type="checkbox" class="chbEq" name="chb_Climatisation">Climatisation</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" class="chbEq" name="chb_AnimauxAutorise">Animaux autorisés</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <button id="precedent2" name="precedent2" type="button"  class="btn-large full-width">PRECEDENT</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button id="suivant3" type="button" name="suivant3" class="btn-large full-width">SUIVANT</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="div4" hidden>
+                    <h2>Etape 4/5</h2>
+                    <div class="form-group">
+                        <label>Reglement</label>
+                        {{ form_widget(form.reglementLogement, {'attr': {'class': 'input-text full-width','rows': '6','placeholder':'Ecrire le reglement de votre logement'}}) }}
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+
+                            {{ form_widget(form.checkin, {'attr': {'class': 'input-text full-width','hidden':'true'}}) }}
+                        </div>
+                        <div class="col-xs-6">
+
+                            {{ form_widget(form.checkout, {'attr': {'class': 'input-text full-width','hidden':'true'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <label>Region</label>
+                            {{ form_widget(form.region, {'attr': {'class': 'input-text full-width'}}) }}
+                            {{ form_widget(form.parking, {'attr': {'class': 'input-text full-width','hidden':'true'}}) }}
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <button id="precedent3" type="button"  name="precedent3" class="btn-large full-width">PRECEDENT</button>
+                        </div>
+                        <div class="col-xs-6">
+                            {{ form_widget(form.SUIVANT, {'attr': {'class': 'btn-large full-width'}}) }}
+                        </div>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        jQuery(document).ready(function() {
+            $("#suivant1").click(function () {
+                $("#div1").animate( { "opacity": "hide", top:"100"} , 500 );
+                $("#div2").animate( { "opacity": "show", top:"100"} , 500 );
+            });
+            $("#suivant2").click(function () {
+                $("#div2").animate( { "opacity": "hide", top:"100"} , 500 );
+                $("#EquipementDiv").animate( { "opacity": "show", top:"100"} , 500 );
+            });
+            $("#suivant3").click(function () {
+                $("#EquipementDiv").animate( { "opacity": "hide", top:"100"} , 500 );
+                $("#div4").animate( { "opacity": "show", top:"100"} , 500 );
+            });
+
+            $("#precedent1").click(function () {
+                $("#div1").animate( { "opacity": "show", top:"100"} , 500 );
+                $("#div2").animate( { "opacity": "hide", top:"100"} , 500 );
+            });
+            $("#precedent2").click(function () {
+                $("#div2").animate( { "opacity": "show", top:"100"} , 500 );
+                $("#EquipementDiv").animate( { "opacity": "hide", top:"100"} , 500 );
+            });
+            $("#precedent3").click(function () {
+                $("#EquipementDiv").animate( { "opacity": "show", top:"100"} , 500 );
+                $("#div4").animate( { "opacity": "hide", top:"100"} , 500 );
+            });
+        });
+
+    </script>
+    <script>
+
+        $('.chbEq').checkboxpicker({
+            html: true,
+            offLabel: '<span class="glyphicon glyphicon-remove">',
+            onLabel: '<span class="glyphicon glyphicon-ok">'
+        });
+    </script>
+{% endblock %}

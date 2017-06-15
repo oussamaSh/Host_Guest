@@ -1,0 +1,43 @@
+AfficherBadge_route:
+    path:     /showBadge
+    defaults: { _controller: HomeBadgeBundle:Badge:photo}
+
+chercherBadge_route:
+    path:     /search
+    defaults: { _controller: HomeBadgeBundle:Badge:Chercher}
+
+Ajout_route:
+    path:     /AddBadge
+    defaults: { _controller: HomeBadgeBundle:Badge:ajouter}
+
+Badge_supprimer:
+    path:     /supprimer/{id}
+    defaults: { _controller: HomeBadgeBundle:Badge:supprimer}
+
+Badge_modifier:
+    path:     /modifier/{id}
+    defaults: { _controller: HomeBadgeBundle:Badge:modifier}
+
+Badge_search:
+    path:     /chercher
+    defaults: { _controller: HomeBadgeBundle:Badge:search}
+
+FrontBadge_route:
+    path:     /badgefront
+    defaults: { _controller: HomeBadgeBundle:BadgeAffecter:index}
+
+AfficherBadge_Front:
+     path:     /showBadgeFront
+     defaults: { _controller: HomeBadgeBundle:Badge:showFrontBadge}
+
+MonBadge_route:
+     path:     /MonBadge
+     defaults: { _controller: HomeBadgeBundle:BadgeAffecter:MonBadge}
+
+chart:
+     path:   /stat
+     defaults: { _controller: HomeBadgeBundle:stat:chart}
+
+Affecter_route:
+     path:   /BadgeAffecter
+     defaults: { _controller: HomeBadgeBundle:BadgeAffecter:Affectation}

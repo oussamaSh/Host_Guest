@@ -1,0 +1,49 @@
+<div class="col-lg-9 listing-style3 flight" id="result">
+    {% for reclamation in reclamations %}
+        <article class="box">
+
+            <div class="details col-xs-9 col-sm-10">
+                <div class="details-wrapper">
+                    <div class="first-row">
+                        <div>
+                            <h4 class="box-title">Reclamation<small>{{ reclamation.idMembre.nom }}  {{ reclamation.idMembre.prenom }}</small></h4>
+                            {% if reclamation.etat!="Cloture" %}
+                                <a class="button btn-mini yellow" href="{{ path('Cloturer_reclamationfront_route',{idReclamation:reclamation.idReclamation}) }}" >Cloturer</a>
+                            {% else %}
+                                <a class="button btn-mini yellow" href="" onclick="return false;">Cloturer</a>
+                            {% endif %}
+                        </div>
+                        <div class="action">
+                            <a href="{{ path('Supprimer_reclamationfront_route',{idReclamation:reclamation.idReclamation}) }}" class="button btn-medium green" onclick="return(confirm('Etes-vous sur de vouloir supprimer cette ligne?'))">Supprimer</a>
+                        </div>
+                    </div>
+                    <div class="second-row">
+                        <div class="time">
+                            <div class="take-off col-sm-4">
+                                <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
+                                <div>
+                                    <span class="skin-color">Date</span><br />{{ reclamation.dateReclamation|date("Y-m-d") }}
+                                </div>
+                            </div>
+                            <div class="landing col-sm-4">
+                                <div class="icon"><i class="soap-icon-key yellow-color"></i></div>
+                                <div>
+                                    <span class="skin-color">Sujet</span><br />{{ reclamation.sujetReclamation }}
+                                </div>
+                            </div>
+                            <div class="total-time col-sm-4">
+                                <div class="icon"><i class="soap-icon-insurance yellow-color"></i></div>
+                                <div>
+                                    <span class="skin-color">Etat</span><br />{{ reclamation.etat }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <a href="{{ path('Affichermessagefront_route',{idReclamation:reclamation.idReclamation}) }}" class="button btn-medium green">Afficher</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+</div>

@@ -1,0 +1,71 @@
+Afficherreclamationback_route:
+    path:     /Afficherreclamationback
+    defaults: { _controller: HomeReclamationBundle:Reclamation:Afficherreclamationback}
+
+Affichermessageback_route:
+    path:     /Afficherreclamationback/{idReclamation}
+    defaults: { _controller: HomeReclamationBundle:Reclamation:Affichermessage}
+
+Stat_route:
+    path:     /StatRecl
+    defaults: { _controller: HomeReclamationBundle:Reclamation:Stat}
+
+Cloturer_reclamation_route:
+    path:     /DQL/cloturerreclamation/{idReclamation}
+    defaults: { _controller: HomeReclamationBundle:Reclamation:Cloturerreclamation2}
+
+NbreReclamation_route:
+    path:     /NbrReclamation
+    defaults: { _controller: HomeReclamationBundle:Reclamation:NbrReclamationtot}
+
+PasserReclamation_route:
+    path:     /PasserReclamation
+    defaults: { _controller: HomeReclamationBundle:Reclamation:AjouterReclamation}
+
+Supprimer_reclamation_route:
+    path:     /SupprimerReclamation/{idReclamation}
+    defaults: { _controller: HomeReclamationBundle:Reclamation:supprimerReclamation}
+
+Afficherreclamationfront_route:
+    path:     /Afficherreclamationfront
+    defaults: { _controller: HomeReclamationBundle:Reclamation:Afficherreclamationfront}
+
+Supprimer_reclamationfront_route:
+    path:     /SupprimerReclamationfront/{idReclamation}
+    defaults: { _controller: HomeReclamationBundle:Reclamation:supprimerReclamationFront}
+
+Cloturer_reclamationfront_route:
+    path:     /DQL/cloturerreclamationfront/{idReclamation}
+    defaults: { _controller: HomeReclamationBundle:Reclamation:Cloturerreclamationfront}
+
+Recherche_reclamation_back_route:
+    path:     /recherchereclamationback
+    defaults: { _controller: HomeReclamationBundle:Reclamation:RechercherReclamation}
+
+Recherche_reclamation_back_ajax_route:
+    path:     /recherchereclamationbackajax
+    defaults: { _controller: HomeReclamationBundle:Reclamation:RechercheReclamationBackAjax}
+
+Recherche_reclamation_front_route:
+    path:     /recherchereclamationfront
+    defaults: { _controller: HomeReclamationBundle:Reclamation:RechercherReclamationfront}
+
+Recherche_reclamation_front_Ajax_route:
+    path:     /recherchereclamationfrontajax
+    defaults: { _controller: HomeReclamationBundle:Reclamation:RechercherReclamationfrontAjax}
+
+Repondre_reclamation_route:
+    path:     /repondrereclamationback/{idReclamation}
+    defaults: { _controller: HomeReclamationBundle:Reclamation:repondrereclamationadmin}
+
+Repondre_reclamation_front_route:
+    path:     /repondrereclamationfront/{idReclamation}
+    defaults: { _controller: HomeReclamationBundle:Reclamation:repondrereclamationmembre}
+
+Affichermessagefront_route:
+    path:     /Afficherreclamationfront/{idReclamation}
+    defaults: { _controller: HomeReclamationBundle:Reclamation:Affichermessagefront}
+
+statistique_route:
+    path:     /statrecl
+    defaults: { _controller: HomeReclamationBundle:Reclamation:chart}

@@ -1,0 +1,42 @@
+Ajout_produit:
+      path:    /AjoutProduit
+      defaults: { _controller: HomeBoutiqueBundle:Produit:AjoutProduit }
+
+Liste_produit:
+      path:    /ListeProduit
+      defaults: { _controller: HomeBoutiqueBundle:Produit:AffichageListeProduit }
+
+Delete_produit:
+      path: /Delete/{id}
+      defaults: { _controller: HomeBoutiqueBundle:Produit:SupprimerProduit }
+
+Modifier_Produit:
+      path:    /ModifierProduit/{id}
+      defaults: { _controller: HomeBoutiqueBundle:Produit:ModifierProduit }
+Recherche_produit:
+      path:    /Rechercher
+      defaults: { _controller: HomeBoutiqueBundle:Produit:RechercheProduit }
+Boutique:
+      path:    /Boutique
+      defaults: { _controller: HomeBoutiqueBundle:Produit:AffichageBoutique }
+
+Details_Produit:
+      path:    /DetailsBoutique/{id}
+      defaults: { _controller: HomeBoutiqueBundle:Produit:AffichageDetailsProduit }
+Acheter_Produit:
+      path:    /AcheterProduit/{id}
+      defaults: { _controller: HomeBoutiqueBundle:DateAchat:Ajout_Date_Achat }
+
+Ajouter_Livraison:
+      path:    /AjouterLivraison
+      defaults: { _controller: HomeBoutiqueBundle:Livraison:Ajout_Livraison }
+
+Afficher_livraison:
+      path:    /Listedeslivraison/{idDateAchat}
+      defaults: { _controller: HomeBoutiqueBundle:Livraison:AffichageListeLivraison }
+Afficher_Achats:
+      path:    /ListedesAchats
+      defaults: { _controller: HomeBoutiqueBundle:DateAchat:AffichageAchat }
+chart:
+      path:    /stat
+      defaults: { _controller: HomeBoutiqueBundle:Statistique:chart }

@@ -1,0 +1,93 @@
+{%  extends '::master_front.html.twig' %}
+{% block body %}
+
+    <section id="content" class="gray-area">
+    <div class="container text-left shortcode">
+    <div class="block">
+    <div class="row">
+
+    {% for reclamation in reclamations %}
+    {% if ((reclamation.etat)!="Cloture") %}
+
+        <div class="col-lg-3 pull-right">
+            <div class="travelo-box book-with-us-box"><h1>Répondre</h1></br>
+            {% for message in messages %}
+            <form action="{{ path('Repondre_reclamation_front_route',{idReclamation:message.idReclamation.idReclamation}) }}" method="POST">
+                {%  endfor %}
+                        <h4>Contenu du message</h4><br>
+                    <textarea type="text" id="contenu_membre" name="contenu_membre" class="input-text full-width" placeholder="Votre message">
+                    </textarea></br></br>
+
+
+                        <button type="submit" class="button btn-medium yellow">Valider</button>
+
+
+            </form>
+        </div>
+        </div>
+        {% else %}
+        <div class="col-lg-3 pull-right">
+        <img src="{{ asset('images/aa.jpg') }}" height="420" width="320">
+        </div>
+    {% endif %}
+    {% endfor %}
+
+    <div class="col-lg-9 listing-style3 flight">
+    {% if messages!="" %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-envelope-o fa-fw"></i> Liste des messages
+            </div>
+
+            {% for message in messages %}
+
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <ul class="timeline1">
+                    {% if(message.contenuMembre==null) %}
+                        <li>
+                            <div class="timeline-badge1 info"><i class="fa fa-male"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Admin</h4>
+                                    <p><small class="text-muted"><i class="fa fa-clock-o"></i> {{ message.TimeMsg|date }}</small>
+                                    </p>
+                                </div>
+                                <div class="timeline-body1">
+                                    <p>{{ message.contenuAdmin }}</p>
+                                </div>
+                            </div>
+
+                        </li>
+                    {% elseif(message.contenuAdmin==null) %}
+                        <li class="timeline-inverted">
+                            <div class="timeline-badge1 success"><i class="fa fa-male"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Membre</h4>
+                                    <p><small class="text-muted1"><i class="fa fa-clock-o"></i> {{ message.TimeMsg|date }}
+                                        </small>
+                                    </p>
+                                </div>
+                                <div class="timeline-body1">
+                                    <p>{{ message.contenuMembre }}</p>
+                                </div>
+                            </div>
+                        </li>
+
+                    {% endif %}
+                    {%  endfor %}
+                </ul>
+            </div>
+            <!-- /.panel-body -->
+
+    </div>
+    </div>
+        </div>
+        </div>
+        </div>
+        </section>
+{% endif %}
+{% endblock %}

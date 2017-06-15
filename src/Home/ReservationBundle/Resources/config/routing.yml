@@ -1,0 +1,52 @@
+Afficher_Reservations:
+      path:    /ListeReservation
+      defaults: { _controller: HomeReservationBundle:Reservation:AfficherListeReservaton }
+Supprimer_Reservations:
+       path:  /supprimerReservation/{idReservation}
+       defaults: {_controller: HomeReservationBundle:Reservation:SupprimerReservation }
+Rechercher_Reservations:
+       path:  /rechercherReservation
+       defaults: {_controller: HomeReservationBundle:Reservation:RechercheReservation }
+Ajouter_Reservations:
+       path:  /ajouterReservation
+       defaults: {_controller: HomeReservationBundle:Reservation:ajouterReservation2 }
+Modifier_Reservations:
+       path:  /modifierReservation/{idReservation}
+       defaults: {_controller: HomeReservationBundle:Reservation:modifierReservation }
+Afficher_Factures:
+      path:    /ListeFacture
+      defaults: { _controller: HomeReservationBundle:Reservation:AfficherListeFactureBack }
+Supprimer_Factures:
+       path:  /supprimerFacture/{idFacture}
+       defaults: {_controller: HomeReservationBundle:Facture:SupprimerFacture }
+Rechercher_Factures:
+       path:  /rechercherFacture
+       defaults: {_controller: HomeReservationBundle:Facture:RechercheFacture }
+Afficher_Reservation_front_Host:
+       path:  /AfficherReservationHost
+       defaults: {_controller: HomeReservationBundle:Reservation:AfficherReservationhost }
+Confirmer_Reservation:
+       path:  /ConfirmerReservation/{idReservation}
+       defaults: {_controller: HomeReservationBundle:Reservation:ConfirmerReservationhost }
+Refuser_Reservation:
+       path:  /RefuserReservation/{idReservation}
+       defaults: {_controller: HomeReservationBundle:Reservation:RefuserReservationhost }
+Payer_Reservation:
+       path:  /Payment/{id}/payment/create
+       defaults: {_controller: HomeReservationBundle:Reservation:paymentCreate }
+Afficher_facture:
+       path:   /AfficherFacture/{idReservation}
+       defaults: {_controller: HomeReservationBundle:Reservation:AfficherFacture }
+PDF_facture:
+       path:   /pdf/{idReservation}
+       defaults: {_controller: HomeReservationBundle:Reservation:pdf }
+Afficher_Reservation_front_Guest:
+       path:  /AfficherReservationGuest
+       defaults: {_controller: HomeReservationBundle:Reservation:AfficherReservationguest }
+Stat_reservation:
+       path:   /stat
+       defaults: {_controller: HomeReservationBundle:Reservation:statreservation }
+Stat_facture:
+       path:   /statfacture
+       defaults: {_controller: HomeReservationBundle:Reservation:statFacture }
+

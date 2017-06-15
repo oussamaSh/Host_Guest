@@ -1,0 +1,60 @@
+<table class="table table-hover" id="resultat">
+    <thead>
+    <tr>
+
+        <th>Id</th>
+        <th>Titre</th>
+        <th>Adresse</th>
+        <th>Description</th>
+        <th>Reglement</th>
+        <th>Region</th>
+        <th>Pays</th>
+        <th>Hote</th>
+        <th>Afficher</th>
+        <th>Supprimer</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for annonce in annonces %}
+        <tr>
+
+            <td>{{ annonce.idLogement }}</td>
+            <td>{{ annonce.titreAnnonce }}</td>
+            <td>{{ annonce.adresseLogement }}</td>
+            <td>{{ annonce.descriptionLogement[0:30] }}{% if annonce.descriptionLogement|length > 30 %}...{% endif %}</td>
+            <td>{{ annonce.reglementLogement[0:30] }}{% if annonce.reglementLogement|length > 30 %}...{% endif %}</td>
+            <td>{{ annonce.region }}</td>
+            <td>{{ annonce.paysLogement }}</td>
+            <td>{{ annonce.idMembre.prenom }}</td>
+            <td><a class="btn btn-info" href="{{ path('Affiche_Details_Annonce',{'idLogement':annonce.idLogement}) }}">Consulter</a></td>
+            <td><a class="btn btn-danger btn-circle delete-btn" href data-toggle="modal" data-target="#myModal" id="{{ annonce.idLogement }}"> <i class="fa fa-times"></i> </a></td>
+
+
+        </tr>
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Suppression</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>Voulez vous vraiment supprimer cette annonce ?</p>
+                        <p style="color: #ac2925">Cette action est irreversible!</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a class="btn btn-outline btn-primary" href data-dismiss="modal">Annuler</a>
+                        <a class="btn btn-outline btn-danger remove_item"  >Supprimer</a>
+                    </div>
+                    <input id="remove" hidden>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,44 @@
+Ajoutmodelnotification_route:
+    path:     /Ajoutmodelnotif
+    defaults: { _controller: HomeNotificationBundle:Notification:AjouterModelNotif}
+
+Affichermodelnotification_route:
+    path:     /Affichermodelnotif
+    defaults: { _controller: HomeNotificationBundle:Notification:AfficherModelNotification}
+
+Suprrimermodelnotification_route:
+    path:     /Supprimermodelnotif/{idModelNotif}
+    defaults: { _controller: HomeNotificationBundle:Notification:SupprimerModelNotification}
+
+recuperermodelnotification_route:
+    path:     /recuperermodelnotif/{typeNotif}
+    defaults: { _controller: HomeNotificationBundle:Notification:recuperermodelnotif2}
+
+Affichernotification_route:
+    path:     /Affichernotification
+    defaults: { _controller: HomeNotificationBundle:Notification:AfficherNotification}
+
+Suprrimernotification_route:
+    path:     /Supprimernotification/{idNotification}
+    defaults: { _controller: HomeNotificationBundle:Notification:SupprimerNotification}
+
+Lirenotification_route:
+    path:     /Lirenotification/{idNotification}
+    defaults: { _controller: HomeNotificationBundle:Notification:LireNotification}
+
+RechercheModelNotif:
+    path:     /RechercherModelNotif
+    defaults: { _controller: HomeNotificationBundle:Notification:AfficherModelNotificationRech}
+
+RechercheAjax:
+    path:     /RechercherModelNotification
+    defaults: { _controller: HomeNotificationBundle:Notification:rechercheModelNotificationAjax}
+
+ModifierModelNotif:
+    path:     /ModifierModelNotif/{idModelNotif}
+    defaults: { _controller: HomeNotificationBundle:Notification:ModifierModelNotif}
+
+
+
+
+

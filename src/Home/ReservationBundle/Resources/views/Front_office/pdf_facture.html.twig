@@ -1,0 +1,61 @@
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+
+<body style="background-color:powderblue;">
+<h1 style="color:black;" align="center">HOST&GUEST</h1>
+<h4>Facture  num: {{ reservation.paymentInstruction.id }}</h4>
+
+<h5>Client:{{ reservation.idMembre.nom }}  {{ reservation.idMembre.prenom }}</h5>
+<h5>Hote:{{ reservation.idLogement.idMembre.nom }}  {{ reservation.idLogement.idMembre.prenom }}</h5>
+
+
+<table style="width:100%">
+    <caption>Reservation num: {{ reservation.idReservation}} </caption>
+
+
+    <tr>
+        <td>DATE DEBUT</td>
+        <td>{{ reservation.dateDebut|date('d/m/Y')}}</td>
+    </tr>
+    <tr>
+        <td>DATE FIN</td>
+        <td>{{ reservation.dateFin|date('d/m/Y')}}</td>
+    </tr>
+    <tr>
+
+        <td>PAYS</td>
+        <td>{{ reservation.idLogement.paysLogement}}</td>
+    </tr>
+    <tr>
+        <td>ADRESSE</td>
+        <td>{{ reservation.idLogement.adresseLogement}}</td>
+    </tr>
+    <tr>
+        <td>PRIX</td>
+        <td>{{ reservation.prixTot}} DT</td>
+    </tr>
+    <tr>
+        <td>FAIT LE</td>
+        <td>{{ reservation.paymentInstruction.createdAt|date }}</td>
+    </tr><tr>
+        <td>PAR</td>
+        <td>{{ reservation.paymentInstruction.paymentSystemName }}</td>
+    </tr>
+
+
+
+</table>
+
+
+
+</body>

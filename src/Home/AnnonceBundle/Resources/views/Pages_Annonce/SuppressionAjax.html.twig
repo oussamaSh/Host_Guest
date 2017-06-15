@@ -1,0 +1,66 @@
+<div class="hotel-list listing-style3 hotel" id="div">
+    <h3 class="title-container">Liste de vos annonces</h3>
+    {% for annonce in annonces %}
+        <article class="box">
+            {% for image in annonce.pictures %}
+                {% if loop.first %}
+                    <figure class="col-sm-5 col-md-4">
+                        <a href="{{path('Slideshow_popup',{'idLogement':annonce.idLogement}) }}" class="hover-effect popup-gallery"><img width="270" height="160" alt="" src="{{ asset('uploads/' ~ image.path) }}" ></a>
+                    </figure>
+                {% endif %}
+            {% endfor %}
+            <div class="details col-sm-7 col-md-8">
+                <div>
+                    <div>
+                        <h4 class="box-title"><a href="{{ path('Affiche_Details_Annonce',{'idLogement':annonce.idLogement}) }}">{{ annonce.titreAnnonce }}</a><small><i class="soap-icon-departure yellow-color"></i> {{ annonce.region }}, {{ annonce.paysLogement }}</small></h4>
+                        <div class="amenities">
+                            <i class="soap-icon-wifi circle"></i>
+                            <i class="soap-icon-fitnessfacility circle"></i>
+                            <i class="soap-icon-fork circle"></i>
+                            <i class="soap-icon-television circle"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="five-stars-container">
+                            <span class="five-stars" style="width: 80%;"></span>
+                        </div>
+                        <span class="review">270 reviews</span>
+                    </div>
+                </div>
+                <div>
+                    <p>{{ annonce.descriptionLogement[0:150] }}{% if annonce.descriptionLogement|length > 150 %}...{% endif %}</p>
+                    <div>
+                        <span class="price">{{ annonce.prixLogement }} DT<small>/Nuit</small></span>
+
+                        <a class="button btn-small full-width text-center"  href="{{ path('Modifier_Annonce',{'idLogement':annonce.idLogement}) }}">MODIFIER</a>
+                        <a class="button btn-small red full-width text-center delete-btn" title="delete" href data-toggle="modal" data-target="#myModal" id="{{ annonce.idLogement }}">SUPPRIMER</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Suppression</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>Voulez vous vraiment supprimer cette annonce ?</p>
+                        <p style="color: #ac2925">Cette action est irreversible!</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a class="button btn-small  text-center" data-dismiss="modal">Annuler</a>
+                        <a class="button btn-small red  text-center remove_item"  >Supprimer</a>
+                    </div>
+                    <input id="remove" hidden>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>

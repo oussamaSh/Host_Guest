@@ -1,0 +1,82 @@
+{%  extends '::master_back.html.twig' %}
+
+{% block body %}
+    <script src="{{ asset('js/jquery-3.1.1.js') }}"></script>
+    <div class="form-group col-lg-6 col-lg-offset-3" >
+        <label for="keyword">Rechercher:</label>
+            <select id="keyword">
+                <option value="Compte" selected >Compte</option>
+                <option value="Badge">Badge</option>
+                <option value="Livraison" >Livraison</option>
+                <option value="Reclamation">Reclamation</option>
+            </select>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="text-align:center">
+                Liste  Model Notification
+            </div>
+
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="resultat">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Type</th>
+                            <th>Contenu</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        </thead>
+
+                        {% for modelnotif in modelnotifs %}
+                            <tr>
+                                <td>{{ modelnotif.idModelNotif }}</td>
+                                <td>{{ modelnotif.typeNotif}}</td>
+                                <td>{{ modelnotif.contenuNotif}}</td>
+                                <td><form action="{{ path('ModifierModelNotif',{idModelNotif:modelnotif.idModelNotif}) }}" method="POST">
+                                        <button type="submit" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i>
+                                        </button></form></td>
+
+                                <td> <form action="{{ path('Suprrimermodelnotification_route',{idModelNotif:modelnotif.idModelNotif}) }}" method="POST" onclick="return(confirm('Etes-vous sur de vouloir supprimer cette ligne?'))">
+                                        <button type="submit"  class="btn btn-danger btn-circle"> <i class="fa fa-times"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function(){
+
+            var searchField = $('#keyword');
+            var annonceDiv = $('#resultat');
+
+            searchField.change(function(evt){
+                $.ajax({
+                    url: '{{ path('RechercheAjax') }}',
+                    method: "POST",
+                    data: "q=" + $(this).val() ,
+                    dataType: 'html',
+                    success: function(result) {
+
+                        var parsedData =result;
+                        annonceDiv.empty();
+                        annonceDiv.html(parsedData);
+
+                    }
+                });
+            });
+        });
+    </script>
+
+{%  endblock %}

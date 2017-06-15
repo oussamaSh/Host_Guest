@@ -1,0 +1,31 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+
+
+<div class="container">
+    <div id="signupbox" style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">Sign Up</div>
+                <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+            </div>
+            <div class="panel-body" >
+
+                {{ form_start(form, {'method': 'post', 'action': path('inscription'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+                {{ form_widget(form) }}
+                <div class="form-group">
+                    <!-- Button -->
+                    <div class="col-md-offset-3 col-md-9">
+                        <input  id="btn-signup" class="btn btn-info" type="submit" value="{{ 'registration.submit'|trans }}" />
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>

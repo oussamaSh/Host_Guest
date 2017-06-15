@@ -1,0 +1,34 @@
+{% extends 'master_back.html.twig' %}
+
+    {% block body %}
+        {% for badge in badges %}
+            <div class ="col-lg-4">
+
+                <div >
+                    <article class="box">
+                        <figure>
+       <img alt="" src="{{ asset('uploads/' ~ badge.path) }}" height="80" width="80" />
+                        </figure>
+                        <div class="details">
+                            <h4 class="box-title">{{ badge.titre}}</h4>
+                            <h6 class="box-title">{{ badge.descriptionBadge}}</h6>
+
+                            <button type="button" class="btn btn-warning btn-circle">
+                               <a href="{{ path ('Badge_modifier',{id:badge.idModelbadge}) }}">
+                                   <i class="fa fa-edit"></i>
+                                 </a> </button>
+                            <button type="button" class="btn btn-danger btn-circle">
+                                <a href="{{ path ('Badge_supprimer',{id:badge.idModelbadge}) }}"onclick="return confirm('voulez vous vraiment supprimer ce badge ?')">
+                                    <i class="fa fa-times">
+                                    </i>
+                                </a>
+                            </button>
+
+
+                        </div>
+                    </article>
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}
+
